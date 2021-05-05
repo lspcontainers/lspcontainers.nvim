@@ -1,6 +1,6 @@
 # lspcontainers.nvim
 
-Neovim plugin for lspcontainers. Developed weekly live at [The Alt-F4 Stream](https://www.twitch.tv/thealtf4stream "The Alt-F4 Stream") on Twitch.
+Neovim plugin for lspcontainers - developed weekly live at [The Alt-F4 Stream](https://www.twitch.tv/thealtf4stream "The Alt-F4 Stream") on Twitch.
 
 > IMPORTANT: everything below is a work-in-progress and subject to change at any time
 
