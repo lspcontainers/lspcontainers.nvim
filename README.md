@@ -30,7 +30,7 @@ Provide a simple method for running language servers in Docker containers using 
 
 ```
 local server = "sumneko_lua"
-require'lspconfig'[server].setup{ command = require'lspcontainers'.command(server) }
+require'lspconfig'[server].setup{ cmd = require'lspcontainers'.command(server) }
 ```
 
 ## Supported LSPs
