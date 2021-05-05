@@ -4,7 +4,7 @@ Neovim plugin for lspcontainers.
 
 ## Overview
 
-The goal of this plugin is to provide simple setup for running language servers in Docker containers integrated into Neovim. This plugin expects the same LSP names from `neovim/nvim-lspconfig`.
+The goal of this plugin is to provide a simple method for running language servers in Docker containers using `neovim/nvim-lspconfig`. This plugin expects the same language server names from `neovim/nvim-lspconfig`.
 
 ## Installation
 
