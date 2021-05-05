@@ -1,6 +1,8 @@
 # lspcontainers.nvim
 
-Neovim plugin for lspcontainers.
+Neovim plugin for lspcontainers. Developed weekly live at [The Alt-F4 Stream](https://www.twitch.tv/thealtf4stream "The Alt-F4 Stream") on Twitch.
+
+> IMPORTANT: everything below is a work-in-progress and subject to change at any time
 
 ## Overview
 
@@ -14,10 +16,7 @@ Provide a simple method for running language servers in Docker containers using 
   
   ```
   use 'neovim/nvim-lspconfig'
-  use {
-    'lspcontainers/lspcontainers.nvim',
-    requires = { 'neovim/nvim-lspconfig' }
-  }
+  use 'lspcontainers/lspcontainers.nvim'
   ```
 
 - via `plug` manager
