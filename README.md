@@ -10,7 +10,7 @@ Provide a simple method for running language servers in Docker containers using 
 
 ## Installation
 
-1. Install the plugin via your package manager of choice
+1. Install plugins via your package manager of choice
 
 - via `packer` manager
   
