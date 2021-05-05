@@ -37,7 +37,7 @@ require'lspconfig'[server].setup{ cmd = require'lspcontainers'.command(server) }
 
 Below is a list of supported language servers for configuration with `nvim-lspconfig`.
 
-> NOTE: Unchecked LSPs are not currently implemented.
+> NOTE: Any unchecked language servers are planned to be implemented.
 
 - [ ] als
 - [ ] angularls
@@ -116,3 +116,5 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [ ] vuels
 - [ ] yamlls
 - [ ] zls
+
+To add more LSPs, please see the [lspcontainers/dockerfiles](https://github.com/lspcontainers/dockerfiles) repository.
