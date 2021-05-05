@@ -14,23 +14,23 @@ Provide a simple method for running language servers in Docker containers using 
 
 - via `packer` manager
   
-  ```
+  ```lua
   use 'neovim/nvim-lspconfig'
   use 'lspcontainers/lspcontainers.nvim'
   ```
 
 - via `plug` manager
   
-  ```
+  ```vim
   Plug 'neovim/nvim-lspconfig'
   Plug 'lspcontainers/lspcontainers.nvim'
   ```
 
 2. Setup `lspconfig` and replace `command` option
 
-```
+```lua
 local server = "sumneko_lua"
-require'lspconfig'[server].setup{ command = require'lspcontainers'.command(server) }
+require'lspconfig'[server].setup{ cmd = require'lspcontainers'.command(server) }
 ```
 
 ## Supported LSPs
