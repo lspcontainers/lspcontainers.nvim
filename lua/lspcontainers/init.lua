@@ -1,7 +1,8 @@
-local function command(server)
-  local cwd = vim.fn.getcwd()
+local function command(server, user_opts)
+  local opts = user_opts or {}
+  local workdir = opts.root_dir or vim.fn.getcwd()
   local image = ""
-  local volume = cwd..":"..cwd
+  local volume = workdir..":"..workdir
 
   -- TODO: dockerfile exists, needs implementation
   --if server == "dockerls" then

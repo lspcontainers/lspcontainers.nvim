@@ -33,6 +33,16 @@ local server = "sumneko_lua"
 require'lspconfig'[server].setup{ cmd = require'lspcontainers'.command(server) }
 ```
 
+To sync up the volume mount with the lspconfig's `root_dir`, use `on_new_config`
+```lua
+local server = "sumneko_lua"
+require'lspconfig'[server].setup{
+  on_new_config = function(new_config, new_root_dir)
+    new_config.cmd = require'lspcontainers'.command(server, { root_dir = new_root_dir })
+  end
+}
+```
+
 ## Supported LSPs
 
 Below is a list of supported language servers for configuration with `nvim-lspconfig`.
