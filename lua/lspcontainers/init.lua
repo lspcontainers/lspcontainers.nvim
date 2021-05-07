@@ -14,7 +14,7 @@ local function command(server, user_opts)
   end
 
   if server == "gopls" then
-    image = "lspcontainers/go-language-server"
+    image = "lspcontainers/go-language-server:1.16.4"
   end
 
   if image == "" then
