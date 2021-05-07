@@ -2,6 +2,7 @@ local supported_languages = {
   bashls = "lspcontainers/bash-language-server:1.17.0",
   dockerls = "lspcontainers/docker-langserver:0.4.1",
   gopls = "lspcontainers/gopls:0.6.11",
+  pyright = "lspcontainers/pyright:1.1.137",
   sumneko_lua = "lspcontainers/lua-language-server:1.20.5",
   tsserver = "lspcontainers/typescript-language-server:0.5.1",
   yamlls = "lspcontainers/yaml-language-server:0.18.0"
