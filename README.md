@@ -43,6 +43,15 @@ require'lspconfig'[server].setup{
 }
 ```
 
+## Additional Languages
+
+You can add additional LSPs to use through the options
+
+```lua
+require'lspcontainers'.command("lua", {additional_languages = { lua = "lspcontainers/lua-language-server:1.20.5"}})
+```
+LspContainers makes no attempt to modify LspConfig. It is up to the end user to correctly configure LspConfig.
+
 ## Supported LSPs
 
 Below is a list of supported language servers for configuration with `nvim-lspconfig`.
