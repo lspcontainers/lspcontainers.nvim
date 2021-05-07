@@ -66,6 +66,7 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [bashls](#bashls)
 - [dockerls](#dockerls)
 - [gopls](#gopls)
+- [pyright](#pyright)
 - [sumneko_lua](#sumneko_lua)
 - [tsserver](#tsserver)
 - [yamlls](#yamlls)
@@ -114,6 +115,22 @@ require'lspconfig'.gopls.setup {
   ...
 }
 ```
+
+### pyright
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#pyright
+
+```lua
+require'lspconfig'.pyright.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('pyright'),
+  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  ...
+}
+```
+
 
 ### sumneko_lua
 
