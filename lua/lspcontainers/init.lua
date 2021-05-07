@@ -13,6 +13,10 @@ local function command(server, user_opts)
     image = "lspcontainers/lua-language-server:1.20.5"
   end
 
+  if server == "gopls" then
+    image = "lspcontainers/go-language-server"
+  end
+
   if image == "" then
     error("Invalid language server provided")
   end
