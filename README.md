@@ -10,7 +10,9 @@ Provide a simple method for running language servers in Docker containers using 
 
 ## Installation
 
-1. Install plugins via your package manager of choice
+1. Install latest [Docker Engine](https://docs.docker.com/engine/install/) for your operating system
+
+2. Install `lspconfig` and `lspcontainers` via package manager
 
 - via `packer` manager
   
@@ -26,7 +28,7 @@ Provide a simple method for running language servers in Docker containers using 
   Plug 'lspcontainers/lspcontainers.nvim'
   ```
 
-2. Setup the language of your choice from [Supported LSPs](#supported-lsps)
+3. Setup the language of your choice from [Supported LSPs](#supported-lsps)
 
 ## Advanced Configuration
 
