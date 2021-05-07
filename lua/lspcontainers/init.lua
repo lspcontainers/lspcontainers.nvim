@@ -1,6 +1,7 @@
 local supported_languages = {
-  sumneko_lua = "lspcontainers/lua-language-server:1.20.5",
-  dockerls = "lspcontainers/docker-langserver:0.4.1"
+  dockerls = "lspcontainers/docker-langserver:0.4.1",
+  gopls = "lspcontainers/gopls:0.6.11",
+  sumneko_lua = "lspcontainers/lua-language-server:1.20.5"
 }
 
 local function command(server, user_opts)
