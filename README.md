@@ -26,14 +26,28 @@ Provide a simple method for running language servers in Docker containers using 
   Plug 'lspcontainers/lspcontainers.nvim'
   ```
 
-2. Setup `lspconfig` and replace `command` option
+2. Setup the language of your choice from [Supported LSPs](#supported-lsps)
+
+## Advanced Configuration
+
+### Additional Languages
+
+You can add the default LSPs through the `additional_languages` shown below:
+
+> NOTE: LspContainers makes no attempt to modify LspConfig. It is up to the end user to correctly configure LspConfig.
 
 ```lua
-local server = "sumneko_lua"
-require'lspconfig'[server].setup{ cmd = require'lspcontainers'.command(server) }
+require'lspcontainers'.command("lua", {
+  additional_languages = {
+    lua = "lspcontainers/lua-language-server:1.20.5"
+  }
+})
 ```
 
-To sync up the volume mount with the lspconfig's `root_dir`, use `on_new_config`
+### Volume Syncing
+
+In some circumstances a language server may need the `root_dir` path synced with the Docker container. To sync up the volume mount with the lspconfig's `root_dir`, use `on_new_config`:
+
 ```lua
 local server = "sumneko_lua"
 require'lspconfig'[server].setup{
@@ -43,97 +57,107 @@ require'lspconfig'[server].setup{
 }
 ```
 
-## Additional Languages
-
-You can add additional LSPs to use through the options
-
-```lua
-require'lspcontainers'.command("lua", {additional_languages = { lua = "lspcontainers/lua-language-server:1.20.5"}})
-```
-LspContainers makes no attempt to modify LspConfig. It is up to the end user to correctly configure LspConfig.
-
 ## Supported LSPs
 
-Below is a list of supported language servers for configuration with `nvim-lspconfig`.
+Below is a list of supported language servers for configuration with `nvim-lspconfig`. Follow a link to find documentation for that config.
 
-> NOTE: Any unchecked language servers are planned to be implemented.
+- [bashls](#bashls)
+- [dockerls](#dockerls)
+- [gopls](#gopls)
+- [sumneko_lua](#sumneko_lua)
+- [tsserver](#tsserver)
+- [yamlls](#yamlls)
 
-- [ ] als
-- [ ] angularls
-- [ ] bashls
-- [ ] beancount
-- [ ] ccls
-- [ ] clangd
-- [ ] clojure_lsp 
-- [ ] cmake
-- [ ] codeqlls
-- [ ] cssls
-- [ ] dartls
-- [ ] denols
-- [ ] dhall_lsp_server
-- [ ] diagnosticls
-- [ ] dockerls
-- [ ] dotls
-- [ ] efm
-- [ ] elixirls
-- [ ] elmls
-- [ ] erlangls
-- [ ] flow
-- [ ] fortls
-- [ ] fsautocomplete
-- [ ] gdscript
-- [ ] ghcide
-- [ ] gopls
-- [ ] graphql
-- [ ] groovyls
-- [ ] haxe_language_server
-- [ ] hie
-- [ ] hls
-- [ ] html
-- [ ] intelephense
-- [ ] jdtls
-- [ ] jedi_language_server
-- [ ] jsonls
-- [ ] julials
-- [ ] kotlin_language_server
-- [ ] leanls
-- [ ] metals
-- [ ] nimls
-- [ ] ocamlls
-- [ ] ocamllsp
-- [ ] omnisharp
-- [ ] perlls
-- [ ] phpactor
-- [ ] powershell_es
-- [ ] purescriptls
-- [ ] pyls
-- [ ] pyls_ms
-- [ ] pyright
-- [ ] r_language_server
-- [ ] racket_langserver
-- [ ] rls
-- [ ] rnix
-- [ ] rome
-- [ ] rust_analyzer
-- [ ] scry
-- [ ] solargraph
-- [ ] sorbet
-- [ ] sourcekit
-- [ ] sqlls
-- [ ] sqls
-- [ ] stylelint_lsp
-- [x] sumneko_lua
-- [ ] svelte
-- [ ] svls
-- [ ] terraformls
-- [ ] texlab
-- [ ] tflint
-- [ ] tsserver
-- [ ] vala_ls
-- [ ] vimls
-- [ ] vls
-- [ ] vuels
-- [ ] yamlls
-- [ ] zls
+### bashls
 
-To add more LSPs, please see the [lspcontainers/dockerfiles](https://github.com/lspcontainers/dockerfiles) repository.
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#bashls
+
+Language server for bash, written using tree sitter in typescript.
+
+```lua
+require'lspconfig'.bashls.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('bashls'),
+  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  ...
+}
+```
+
+### dockerls
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#dockerls
+
+```lua
+require'lspconfig'.dockerls.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('dockerls'),
+  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  ...
+}
+```
+
+### gopls
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#gopls
+
+Google's lsp server for golang.
+
+```lua
+require'lspconfig'.gopls.setup {
+  cmd = require'lspcontainers'.command('gopls'),
+  ...
+}
+```
+
+### sumneko_lua
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#sumneko_lua
+
+Lua language server.
+
+```lua
+require'lspconfig'.sumneko_lua.setup {
+  cmd = require'lspcontainers'.command('sumneko_lua'),
+  ...
+}
+```
+
+### tsserver
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#tsserver
+
+```lua
+require'lspconfig'.tsserver.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('tsserver'),
+  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  ...
+}
+```
+
+### yamlls
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#yamlls
+
+Language server for bash, written using tree sitter in typescript.
+
+```lua
+require'lspconfig'.yamlls.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('yamlls'),
+  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  ...
+}
+```
+
+---
+
+To contribute to LSPs, please see the [lspcontainers/dockerfiles](https://github.com/lspcontainers/dockerfiles) repository.
