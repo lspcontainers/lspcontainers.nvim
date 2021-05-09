@@ -37,6 +37,25 @@ local function command(server, user_opts)
     }
 end
 
+local function setup_language_server(lang, opts)
+  local lspconfig = require('lspconfig')
+
+  local default_opts = {
+    before_init = function(params)
+      params.processId = vim.NIL
+    end,
+    root_dir = util.root_pattern(".git", vim.loop.cwd()),
+  }
+
+  opts = opts or {}
+  opts = vim.tbl_extend('keep', opts, default_opts)
+  opts.cmd = command(lang)
+
+  if opts.cmd == 1 then return end
+  lspconfig[lang].setup(opts)
+end
+
 return {
-  command = command
+  command = command,
+  setup_language_server = setup_language_server
 }
