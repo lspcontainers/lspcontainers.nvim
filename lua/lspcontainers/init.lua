@@ -40,12 +40,8 @@ end
 local function setup_language_server(lang, opts)
   local lspconfig = require('lspconfig')
 
-  local default_opts = {
-    before_init = function(params)
-      params.processId = vim.NIL
-    end,
-    root_dir = util.root_pattern(".git", vim.loop.cwd()),
-  }
+  -- TODO: figure out what default opts should be
+  local default_opts = {}
 
   opts = opts or {}
   opts = vim.tbl_extend('keep', opts, default_opts)
