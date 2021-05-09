@@ -67,7 +67,7 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [dockerls](#dockerls)
 - [gopls](#gopls)
 - [pyright](#pyright)
-- [rust-analyzer](#rust-analyzer)
+- [rust_analyzer](#rust_analyzer)
 - [sumneko_lua](#sumneko_lua)
 - [tsserver](#tsserver)
 - [yamlls](#yamlls)
@@ -132,7 +132,7 @@ require'lspconfig'.pyright.setup {
 }
 ```
 
-### rust-analyzer
+### rust_analyzer
 
 https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
 
@@ -140,7 +140,7 @@ Rust language server.
 
 ```lua
 require'lspconfig'.rust.setup {
-  cmd = require'lspcontainers'.command('rust'),
+  cmd = require'lspcontainers'.command('rust_analyzer'),
   ...
 }
 ```
