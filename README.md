@@ -66,8 +66,11 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [bashls](#bashls)
 - [dockerls](#dockerls)
 - [gopls](#gopls)
+- [pyls](#pyls)
 - [pyright](#pyright)
 - [rust_analyzer](#rust_analyzer)
+- [svelte](#svelte)
+- [terraformls](#terraformls)
 - [sumneko_lua](#sumneko_lua)
 - [tsserver](#tsserver)
 - [yamlls](#yamlls)
@@ -75,8 +78,6 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 ### bashls
 
 https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#bashls
-
-Language server for bash, written using tree sitter in typescript.
 
 ```lua
 require'lspconfig'.bashls.setup {
@@ -108,11 +109,20 @@ require'lspconfig'.dockerls.setup {
 
 https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#gopls
 
-Google's lsp server for golang.
-
 ```lua
 require'lspconfig'.gopls.setup {
   cmd = require'lspcontainers'.command('gopls'),
+  ...
+}
+```
+
+### pyls
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#pyls
+
+```lua
+require'lspconfig'.pyls.setup {
+  cmd = require'lspcontainers'.command('pyls'),
   ...
 }
 ```
@@ -136,8 +146,6 @@ require'lspconfig'.pyright.setup {
 
 https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
 
-Rust language server.
-
 ```lua
 require'lspconfig'.rust.setup {
   cmd = require'lspcontainers'.command('rust_analyzer'),
@@ -149,14 +157,39 @@ require'lspconfig'.rust.setup {
 
 https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#sumneko_lua
 
-Lua language server.
-
 ```lua
 require'lspconfig'.sumneko_lua.setup {
   cmd = require'lspcontainers'.command('sumneko_lua'),
   ...
 }
 ```
+
+### svelte
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#svelte
+
+```lua
+require'lspconfig'.svelte.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('svelte'),
+  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  ...
+}
+```
+
+### terraformls
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#terraformls
+
+```lua
+require'lspconfig'.terraformls.setup {
+  cmd = require'lspcontainers'.command('terraformls'),
+  ...
+}
+```
+
 
 ### tsserver
 
@@ -176,8 +209,6 @@ require'lspconfig'.tsserver.setup {
 ### yamlls
 
 https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#yamlls
-
-Language server for bash, written using tree sitter in typescript.
 
 ```lua
 require'lspconfig'.yamlls.setup {
