@@ -21,10 +21,8 @@ jobs:
         with:
           path: _neovim
           key: ${{ runner.os }}-nightly-${{ hashFiles('todays-date') }}
-      - name: Setup from neovim nightly
+      - name: Setup from neovim nightly and run test suite
         run: |
           curl -OL https://raw.githubusercontent.com/norcalli/bot-ci/master/scripts/github-actions-setup.sh
           source github-actions-setup.sh nightly-x64
-
-      - name: "Run test script"
-        run: ./scripts/test.sh
+          ./scripts/test.sh
