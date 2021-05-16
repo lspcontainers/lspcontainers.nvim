@@ -186,6 +186,7 @@ https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#terraformls
 ```lua
 require'lspconfig'.terraformls.setup {
   cmd = require'lspcontainers'.command('terraformls'),
+  filetypes = { "hcl", "tf", "terraform", "tfvars" },
   ...
 }
 ```
