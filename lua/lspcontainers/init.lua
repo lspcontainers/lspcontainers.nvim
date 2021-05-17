@@ -28,18 +28,18 @@ local function command(server, user_opts)
   end
 
   if not cmd_builder then
-      return {
-          "docker",
-          "container",
-          "run",
-          "--interactive",
-          "--rm",
-          "--volume",
-          volume,
-          image
-        }
+    return {
+      "docker",
+      "container",
+      "run",
+      "--interactive",
+      "--rm",
+      "--volume",
+      volume,
+      image
+    }
   else
-      return cmd_builder(volume, image)
+    return cmd_builder(volume, image)
   end
 end
 
