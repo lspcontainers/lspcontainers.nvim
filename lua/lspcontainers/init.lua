@@ -19,22 +19,28 @@ local function command(server, user_opts)
   local image = additional_languages[server]
                 or supported_languages[server]
                 or nil
+  
+  local cmd_builder = opts.cmd_builder
 
   if not image then
     error(string.format("lspcontainers: language not supported `%s`", server))
     return 1
   end
 
-  return {
-      "docker",
-      "container",
-      "run",
-      "--interactive",
-      "--rm",
-      "--volume",
-      volume,
-      image
-    }
+  if not cmd_builder then
+      return {
+          "docker",
+          "container",
+          "run",
+          "--interactive",
+          "--rm",
+          "--volume",
+          volume,
+          image
+        }
+  else
+      return cmd_builder(volume, image)
+  end
 end
 
 return {
