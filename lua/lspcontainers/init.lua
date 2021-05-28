@@ -41,5 +41,6 @@ local function command(server, user_opts)
 end
 
 return {
-  command = command
+  command = command,
+  supported_languages = supported_languages
 }
