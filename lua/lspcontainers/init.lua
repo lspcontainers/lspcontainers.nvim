@@ -1,12 +1,26 @@
+-- default command to run the lsp container
+local default_cmd = function (runtime, volume, image)
+	return {
+	  runtime,
+	  "container",
+	  "run",
+	  "--interactive",
+	  "--rm",
+	  "--volume",
+	  volume,
+	  image
+	}
+end
+
 local supported_languages = {
-  bashls = "lspcontainers/bash-language-server:1.17.0",
-  dockerls = "lspcontainers/docker-langserver:0.4.1",
-  gopls = "lspcontainers/gopls:0.6.11",
-  pyright = "lspcontainers/pyright-langserver:1.1.137",
-  rust_analyzer = "lspcontainers/rust-analyzer:2021-05-03",
-  sumneko_lua = "lspcontainers/lua-language-server:1.20.5",
-  tsserver = "lspcontainers/typescript-language-server:0.5.1",
-  yamlls = "lspcontainers/yaml-language-server:0.18.0"
+  bashls = { image =  "lspcontainers/bash-language-server:1.17.0" , cmd = default_cmd},
+  dockerls = { image = "lspcontainers/docker-langserver:0.4.1", cmd = default_cmd },
+  gopls = { image = "lspcontainers/gopls:0.6.11", cmd = default_cmd },
+  pyright = { image = "lspcontainers/pyright-langserver:1.1.137", cmd = default_cmd },
+  rust_analyzer = { image = "lspcontainers/rust-analyzer:2021-05-03", cmd = default_cmd },
+  sumneko_lua = { image = "lspcontainers/lua-language-server:1.20.5", cmd = default_cmd },
+  tsserver = { image = "lspcontainers/typescript-language-server:0.5.1", cmd = default_cmd },
+  yamlls = { image = "lspcontainers/yaml-language-server:0.18.0", cmd = default_cmd }
 }
 
 local function command(server, user_opts)
@@ -16,31 +30,23 @@ local function command(server, user_opts)
   local volume = workdir..":"..workdir
 
   local additional_languages = opts.additional_languages or {}
-  local image = additional_languages[server]
-                or supported_languages[server]
-                or nil
-  
-  local cmd_builder = opts.cmd_builder
+  local image = nil
+  local cmd_builder = nil
+  if additional_languages[server] then
+    image = additional_languages[server].image
+	cmd_builder = additional_languages[server].cmd
+  else
+    image = supported_languages[server].image
+	cmd_builder = supported_languages[server].cmd
+  end
+  local runtime = opts.container_runtime or "docker"
 
   if not image then
     error(string.format("lspcontainers: language not supported `%s`", server))
     return 1
   end
 
-  if not cmd_builder then
-    return {
-      "docker",
-      "container",
-      "run",
-      "--interactive",
-      "--rm",
-      "--volume",
-      volume,
-      image
-    }
-  else
-    return cmd_builder(volume, image)
-  end
+  return cmd_builder(runtime, volume, image)
 end
 
 return {
