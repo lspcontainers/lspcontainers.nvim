@@ -1,6 +1,7 @@
 local supported_languages = {
   bashls = "lspcontainers/bash-language-server:1.17.0",
   dockerls = "lspcontainers/docker-langserver:0.4.1",
+  jsonls = "lspcontainers/json-language-server:1.3.4",
   gopls = "lspcontainers/gopls:0.6.11",
   pylsp = "lspcontainers/python-lsp:1.0.1",
   pyright = "lspcontainers/pyright-langserver:1.1.137",
