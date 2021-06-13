@@ -11,7 +11,8 @@ local supported_languages = {
   terraformls = "lspcontainers/terraform-ls:0.16.3",
   sumneko_lua = "lspcontainers/lua-language-server:1.20.5",
   tsserver = "lspcontainers/typescript-language-server:0.5.1",
-  yamlls = "lspcontainers/yaml-language-server:0.18.0"
+  yamlls = "lspcontainers/yaml-language-server:0.18.0",
+  vuels = "lspcontainers/vue-language-server:0.7.2"
 }
 
 local function command(server, user_opts)
