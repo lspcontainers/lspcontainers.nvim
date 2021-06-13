@@ -64,8 +64,10 @@ require'lspconfig'[server].setup{
 Below is a list of supported language servers for configuration with `nvim-lspconfig`. Follow a link to find documentation for that config.
 
 - [bashls](#bashls)
+- [jsonls](#jsonls)
 - [dockerls](#dockerls)
 - [gopls](#gopls)
+- [html](#html)
 - [pyls](#pyls)
 - [pyright](#pyright)
 - [rust_analyzer](#rust_analyzer)
@@ -74,6 +76,7 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [sumneko_lua](#sumneko_lua)
 - [tsserver](#tsserver)
 - [yamlls](#yamlls)
+- [vuels](#vuels)
 
 ### bashls
 
@@ -86,6 +89,17 @@ require'lspconfig'.bashls.setup {
   end,
   cmd = require'lspcontainers'.command('bashls'),
   root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  ...
+}
+```
+
+### jsonls
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#jsonls
+
+```lua
+require'lspconfig'.jsonls.setup {
+  cmd = require'lspcontainers'.command('jsonls'),
   ...
 }
 ```
@@ -112,6 +126,16 @@ https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#gopls
 ```lua
 require'lspconfig'.gopls.setup {
   cmd = require'lspcontainers'.command('gopls'),
+  ...
+}
+```
+
+### html
+
+
+```lua
+require'lspconfig'.gopls.setup {
+  cmd = require'lspcontainers'.command('html'),
   ...
 }
 ```
@@ -222,6 +246,16 @@ require'lspconfig'.yamlls.setup {
 }
 ```
 
+### vuels
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#vuels
+
+```lua
+require'lspconfig'.vuels.setup {
+  cmd = require'lspcontainers'.command('vuels'),
+  ...
+}
+```
 ---
 
 To contribute to LSPs, please see the [lspcontainers/dockerfiles](https://github.com/lspcontainers/dockerfiles) repository.
