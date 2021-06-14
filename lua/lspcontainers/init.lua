@@ -1,7 +1,9 @@
 local supported_languages = {
   bashls = "lspcontainers/bash-language-server:1.17.0",
   dockerls = "lspcontainers/docker-langserver:0.4.1",
+  jsonls = "lspcontainers/json-language-server:1.3.4",
   gopls = "lspcontainers/gopls:0.6.11",
+  html = "lspcontainers/html-language-server:1.4.0",
   pylsp = "lspcontainers/python-lsp:1.0.1",
   pyright = "lspcontainers/pyright-langserver:1.1.137",
   rust_analyzer = "lspcontainers/rust-analyzer:2021-05-03",
@@ -9,7 +11,8 @@ local supported_languages = {
   terraformls = "lspcontainers/terraform-ls:0.18.0",
   sumneko_lua = "lspcontainers/lua-language-server:1.20.5",
   tsserver = "lspcontainers/typescript-language-server:0.5.1",
-  yamlls = "lspcontainers/yaml-language-server:0.18.0"
+  yamlls = "lspcontainers/yaml-language-server:0.18.0",
+  vuels = "lspcontainers/vue-language-server:0.7.2"
 }
 
 local function command(server, user_opts)
