@@ -99,7 +99,11 @@ https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#jsonls
 
 ```lua
 require'lspconfig'.jsonls.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
   cmd = require'lspcontainers'.command('jsonls'),
+  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
   ...
 }
 ```
@@ -135,7 +139,11 @@ require'lspconfig'.gopls.setup {
 
 ```lua
 require'lspconfig'.gopls.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
   cmd = require'lspcontainers'.command('html'),
+  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
   ...
 }
 ```
@@ -252,7 +260,11 @@ https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#vuels
 
 ```lua
 require'lspconfig'.vuels.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
   cmd = require'lspcontainers'.command('vuels'),
+  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
   ...
 }
 ```
