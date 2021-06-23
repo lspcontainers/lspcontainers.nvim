@@ -39,3 +39,5 @@ luac.out
 *.x86_64
 *.hex
 
+# Test "suite" clones the lspconfig repo
+nvim-lspconfig/

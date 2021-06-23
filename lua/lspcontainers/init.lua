@@ -13,14 +13,20 @@ local default_cmd = function (runtime, volume, image)
 end
 
 local supported_languages = {
-  bashls = { image =  "lspcontainers/bash-language-server:1.17.0" , cmd = default_cmd},
+  bashls = { image = "lspcontainers/bash-language-server:1.17.0", cmd = default_cmd },
   dockerls = { image = "lspcontainers/docker-langserver:0.4.1", cmd = default_cmd },
+  jsonls = { image = "lspcontainers/json-language-server:1.3.4", cmd = default_cmd },
   gopls = { image = "lspcontainers/gopls:0.6.11", cmd = default_cmd },
+  html = { image = "lspcontainers/html-language-server:1.4.0", cmd = default_cmd },
+  pylsp = { image = "lspcontainers/python-lsp:1.0.1", cmd = default_cmd },
   pyright = { image = "lspcontainers/pyright-langserver:1.1.137", cmd = default_cmd },
   rust_analyzer = { image = "lspcontainers/rust-analyzer:2021-05-03", cmd = default_cmd },
+  svelte = { image = "lspcontainers/svelte-language-server:0.13.7", cmd = default_cmd },
+  terraformls = { image = "lspcontainers/terraform-ls:0.18.0", cmd = default_cmd },
   sumneko_lua = { image = "lspcontainers/lua-language-server:1.20.5", cmd = default_cmd },
   tsserver = { image = "lspcontainers/typescript-language-server:0.5.1", cmd = default_cmd },
-  yamlls = { image = "lspcontainers/yaml-language-server:0.18.0", cmd = default_cmd }
+  yamlls = { image = "lspcontainers/yaml-language-server:0.18.0", cmd = default_cmd },
+  vuels = { image = "lspcontainers/vue-language-server:0.7.2", cmd = default_cmd }
 }
 
 local function command(server, user_opts)
@@ -50,5 +56,6 @@ local function command(server, user_opts)
 end
 
 return {
-  command = command
+  command = command,
+  supported_languages = supported_languages
 }
