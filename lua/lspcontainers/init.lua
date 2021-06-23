@@ -1,15 +1,15 @@
 -- default command to run the lsp container
 local default_cmd = function (runtime, volume, image)
-	return {
-	  runtime,
-	  "container",
-	  "run",
-	  "--interactive",
-	  "--rm",
-	  "--volume",
-	  volume,
-	  image
-	}
+  return {
+    runtime,
+    "container",
+    "run",
+    "--interactive",
+    "--rm",
+    "--volume",
+    volume,
+    image
+  }
 end
 
 local supported_languages = {
