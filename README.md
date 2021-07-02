@@ -68,7 +68,7 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [dockerls](#dockerls)
 - [gopls](#gopls)
 - [html](#html)
-- [pyls](#pyls)
+- [pylsp](#pylsp)
 - [pyright](#pyright)
 - [rust_analyzer](#rust_analyzer)
 - [svelte](#svelte)
@@ -148,13 +148,13 @@ require'lspconfig'.gopls.setup {
 }
 ```
 
-### pyls
+### pylsp
 
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#pyls
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#pylsp
 
 ```lua
-require'lspconfig'.pyls.setup {
-  cmd = require'lspcontainers'.command('pyls'),
+require'lspconfig'.pylsp.setup {
+  cmd = require'lspcontainers'.command('pylsp'),
   ...
 }
 ```
