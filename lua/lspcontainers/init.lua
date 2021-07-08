@@ -14,7 +14,7 @@ end
 
 local supported_languages = {
   bashls = { image = "lspcontainers/bash-language-server:1.17.0", cmd = default_cmd },
-  dockerls = { image = "lspcontainers/docker-langserver:0.4.1", cmd = default_cmd },
+  dockerls = { image = "lspcontainers/docker-language-server:0.4.1", cmd = default_cmd },
   jsonls = { image = "lspcontainers/json-language-server:1.3.4", cmd = default_cmd },
   gopls = { image = "lspcontainers/gopls:0.6.11", cmd = default_cmd },
   html = { image = "lspcontainers/html-language-server:1.4.0", cmd = default_cmd },
