@@ -21,7 +21,7 @@ local supported_languages = {
   pylsp = { image = "lspcontainers/python-lsp-server:1.1.0", cmd = default_cmd },
   pyright = { image = "lspcontainers/pyright-langserver:1.1.137", cmd = default_cmd },
   rust_analyzer = { image = "lspcontainers/rust-analyzer:2021-05-03", cmd = default_cmd },
-  svelte = { image = "lspcontainers/svelte-language-server:0.13.7", cmd = default_cmd },
+  svelte = { image = "lspcontainers/svelte-language-server:0.14.3", cmd = default_cmd },
   terraformls = { image = "lspcontainers/terraform-ls:0.18.0", cmd = default_cmd },
   sumneko_lua = { image = "lspcontainers/lua-language-server:1.20.5", cmd = default_cmd },
   tsserver = { image = "lspcontainers/typescript-language-server:0.5.1", cmd = default_cmd },
