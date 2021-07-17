@@ -1,0 +1,48 @@
+*lspcontainers.txt*     For Neovim 0.5
+
+CONTENTS                                                  *lspcontainers-contents*
+
+  Intro .................................................... |lspcontainers-intro|
+  Usage .................................................... |lspcontainers-intro|
+
+================================================================================
+
+ INTRO                                                       *lspcontainers-intro*
+
+ Lspcontainers provides a simple method to set up language servers for
+ Neovim's builtin LSP client. We provide docker containers for language
+ servers so that users do not need to go through different and sometimes
+ complicated steps when they want to work with a new language. To see a list
+ of the language servers currently support, look at our github.
+
+ Dependencies (see the README on our github for links):
+ 1) Docker - install the latest Docker Engine
+ 2) nvim-lspconfig neovim extension
+
+ Github: https://github.com/lspcontainers/lspcontainers.nvim
+
+================================================================================
+
+ USAGE                                                       *lspcontainers-usage*
+
+ To use, simply override the `cmd` property when calling lspconfig's `setup`
+ function. In general, usage looks something like this:
+>
+    local lspconfig = require('lspconfig')
+    local lspcontainers = require('lspcontainers')
+
+    lspconfig.my_language_server.setup({
+      cmd = lspcontainers.command('my_language_server')
+    })
+<
+ For example, if you were to set up `sumneko_lua`:
+>
+    local lspconfig = require('lspconfig')
+    local lspcontainers = require('lspcontainers')
+
+    lspconfig.sumneko_lua.setup({
+      cmd = lspcontainers.command('sumneko_lua')
+    })
+<
+
+================================================================================
