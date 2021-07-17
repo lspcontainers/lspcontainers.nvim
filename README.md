@@ -77,6 +77,7 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [tsserver](#tsserver)
 - [yamlls](#yamlls)
 - [vuels](#vuels)
+- [intelephense](#intelephense)
 
 ### bashls
 
@@ -265,6 +266,21 @@ require'lspconfig'.vuels.setup {
   end,
   cmd = require'lspcontainers'.command('vuels'),
   root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  ...
+}
+```
+
+### intelephense
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#intelephense
+
+```lua
+require'lspconfig'.intelephense.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('intelephense'),
+  root_dir = util.root_pattern("composer.json", ".git", vim.fn.getcwd()),
   ...
 }
 ```

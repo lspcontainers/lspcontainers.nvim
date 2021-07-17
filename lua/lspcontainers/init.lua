@@ -26,7 +26,8 @@ local supported_languages = {
   sumneko_lua = { image = "lspcontainers/lua-language-server:1.20.5", cmd = default_cmd },
   tsserver = { image = "lspcontainers/typescript-language-server:0.5.1", cmd = default_cmd },
   yamlls = { image = "lspcontainers/yaml-language-server:0.18.0", cmd = default_cmd },
-  vuels = { image = "lspcontainers/vue-language-server:0.7.2", cmd = default_cmd }
+  vuels = { image = "lspcontainers/vue-language-server:0.7.2", cmd = default_cmd },
+  intelephense = { image = "lspcontainers/intelephense:1.7.1", cmd = default_cmd }
 }
 
 local function command(server, user_opts)
