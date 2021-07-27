@@ -180,7 +180,7 @@ require'lspconfig'.pyright.setup {
 https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
 
 ```lua
-require'lspconfig'.rust.setup {
+require'lspconfig'.rust_analyzer.setup {
   cmd = require'lspcontainers'.command('rust_analyzer'),
   ...
 }
