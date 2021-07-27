@@ -64,6 +64,7 @@ require'lspconfig'[server].setup{
 Below is a list of supported language servers for configuration with `nvim-lspconfig`. Follow a link to find documentation for that config.
 
 - [bashls](#bashls)
+- [clangd](#clangd)
 - [jsonls](#jsonls)
 - [dockerls](#dockerls)
 - [gopls](#gopls)
@@ -90,6 +91,17 @@ require'lspconfig'.bashls.setup {
   end,
   cmd = require'lspcontainers'.command('bashls'),
   root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  ...
+}
+```
+
+### clangd
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#clangd
+
+```lua
+require'lspconfig'.clangd.setup {
+  cmd = require'lspcontainers'.command('clangd'),
   ...
 }
 ```
