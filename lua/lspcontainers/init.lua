@@ -18,18 +18,18 @@ local supported_languages = {
   dockerls = { image = "lspcontainers/docker-language-server:0.4.1", cmd = default_cmd },
   jsonls = { image = "lspcontainers/json-language-server:1.3.4", cmd = default_cmd },
   gopls = {
-	image = "lspcontainers/gopls:0.6.11",
-	cmd = function (runtime, volume, image)
-	  local env = vim.api.nvim_eval('environ()')
-	  local gopath = env.GOPATH or env.HOME.."/go"
-	  local gopath_volume = gopath..":"..gopath
+    image = "lspcontainers/gopls:0.6.11",
+    cmd = function (runtime, volume, image)
+      local env = vim.api.nvim_eval('environ()')
+      local gopath = env.GOPATH or env.HOME.."/go"
+      local gopath_volume = gopath..":"..gopath
 
       -- add ':z' to podman volumes to avoid permission denied errors
       if runtime == "podman" then
        gopath_volume = gopath_volume..":z"
       end
 
-	  return {
+      return {
         runtime,
         "container",
         "run",
@@ -38,11 +38,11 @@ local supported_languages = {
         "--volume",
         volume,
         "--volume",
-		gopath_volume,
-		"-e GOPATH="..gopath,
+        gopath_volume,
+        "-e GOPATH="..gopath,
         image
-	  }
-	end
+      }
+    end
   },
   html = { image = "lspcontainers/html-language-server:1.4.0", cmd = default_cmd },
   pylsp = { image = "lspcontainers/python-lsp-server:1.1.0", cmd = default_cmd },
