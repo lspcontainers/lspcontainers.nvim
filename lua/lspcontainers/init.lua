@@ -17,7 +17,33 @@ local supported_languages = {
   clangd = { image = "lspcontainers/clangd-language-server:11.1.0", cmd = default_cmd },
   dockerls = { image = "lspcontainers/docker-language-server:0.4.1", cmd = default_cmd },
   jsonls = { image = "lspcontainers/json-language-server:1.3.4", cmd = default_cmd },
-  gopls = { image = "lspcontainers/gopls:0.6.11", cmd = default_cmd },
+  gopls = {
+	image = "lspcontainers/gopls:0.6.11",
+	cmd = function (runtime, volume, image)
+	  local env = vim.api.nvim_eval('environ()')
+	  local gopath = env.GOPATH or env.HOME.."/go"
+	  local gopath_volume = gopath..":"..gopath
+
+      -- add ':z' to podman volumes to avoid permission denied errors
+      if runtime == "podman" then
+       gopath_volume = gopath_volume..":z"
+      end
+
+	  return {
+        runtime,
+        "container",
+        "run",
+        "--interactive",
+        "--rm",
+        "--volume",
+        volume,
+        "--volume",
+		gopath_volume,
+		"-e GOPATH="..gopath,
+        image
+	  }
+	end
+  },
   html = { image = "lspcontainers/html-language-server:1.4.0", cmd = default_cmd },
   pylsp = { image = "lspcontainers/python-lsp-server:1.1.0", cmd = default_cmd },
   pyright = { image = "lspcontainers/pyright-langserver:1.1.137", cmd = default_cmd },
@@ -33,23 +59,19 @@ local supported_languages = {
 
 local function command(server, user_opts)
   local opts = user_opts or {}
-
+  local runtime = opts.container_runtime or "docker"
   local workdir = opts.root_dir or vim.fn.getcwd()
   local volume = workdir..":"..workdir
 
-  local additional_languages = opts.additional_languages or {}
-  local image = nil
-  local cmd_builder = nil
-  if additional_languages[server] then
-    image = additional_languages[server].image
-	cmd_builder = additional_languages[server].cmd
-  else
-    image = supported_languages[server].image
-	cmd_builder = supported_languages[server].cmd
-  end
-  local runtime = opts.container_runtime or "docker"
+  local image = opts.image or supported_languages[server].image
+  local cmd_builder = opts.cmd or supported_languages[server].cmd
 
-  if not image then
+  -- add ':z' to podman volumes to avoid permission denied errors
+  if user_opts.container_runtime == "podman" then
+    volume = volume..":z"
+  end
+
+  if not image or not cmd_builder then
     error(string.format("lspcontainers: language not supported `%s`", server))
     return 1
   end
