@@ -296,6 +296,21 @@ require'lspconfig'.intelephense.setup {
   ...
 }
 ```
+
+### omnisharp
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#omnisharp
+
+```lua
+require'lspconfig'.omnisharp.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('omnisharp'),
+  root_dir = util.root_pattern(".sln", ".csproj", vim.fn.getcwd()),
+  ...
+}
+```
 ---
 
 To contribute to LSPs, please see the [lspcontainers/dockerfiles](https://github.com/lspcontainers/dockerfiles) repository.
