@@ -79,6 +79,7 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [yamlls](#yamlls)
 - [vuels](#vuels)
 - [intelephense](#intelephense)
+- [omnisharp](#omnisharp)
 
 ### bashls
 
