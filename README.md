@@ -308,7 +308,7 @@ require'lspconfig'.omnisharp.setup {
     params.processId = vim.NIL
   end,
   cmd = require'lspcontainers'.command('omnisharp'),
-  root_dir = util.root_pattern(".sln", ".csproj", vim.fn.getcwd()),
+  root_dir = util.root_pattern("*.sln", "*.csproj", vim.fn.getcwd()),
   ...
 }
 ```
