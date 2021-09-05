@@ -69,6 +69,7 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [dockerls](#dockerls)
 - [gopls](#gopls)
 - [html](#html)
+- [powershell_es](#powershell)
 - [pylsp](#pylsp)
 - [pyright](#pyright)
 - [rust_analyzer](#rust_analyzer)
@@ -160,7 +161,7 @@ require'lspconfig'.gopls.setup {
 }
 ```
 
-### Powershell
+### powershell
 
 https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#powershell_es
 
