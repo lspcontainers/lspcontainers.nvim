@@ -149,7 +149,6 @@ require'lspconfig'.gopls.setup {
 
 ### html
 
-
 ```lua
 require'lspconfig'.gopls.setup {
   before_init = function(params)
@@ -157,6 +156,21 @@ require'lspconfig'.gopls.setup {
   end,
   cmd = require'lspcontainers'.command('html'),
   root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  ...
+}
+```
+
+### Powershell
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#powershell_es
+
+```lua
+require'lspconfig'.powershell_es.setup {
+  on_new_config = function(new_config, new_root_dir)
+    new_config.cmd = require 'lspcontainers'.command(server, { root_dir = new_root_dir }
+  end
+  cmd = {}
+  filetypes = {"ps1", "psm1"}
   ...
 }
 ```
