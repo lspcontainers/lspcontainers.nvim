@@ -167,11 +167,16 @@ https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#powershell_es
 
 ```lua
 require'lspconfig'.powershell_es.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+
   on_new_config = function(new_config, new_root_dir)
     new_config.cmd = require 'lspcontainers'.command(server, { root_dir = new_root_dir }
-  end
-  cmd = {}
-  filetypes = {"ps1", "psm1"}
+  end,
+
+  cmd = {},
+  filetypes = {"ps1", "psm1"},
   ...
 }
 ```
