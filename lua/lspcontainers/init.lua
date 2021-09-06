@@ -36,7 +36,7 @@ local function command(server, user_opts)
   local opts = user_opts or {}
 
   local workdir = opts.root_dir or vim.fn.getcwd()
-  local volume = workdir..":"..workdir
+  local volume = workdir..":"..workdir..":ro"
 
   local additional_languages = opts.additional_languages or {}
   local image = nil
