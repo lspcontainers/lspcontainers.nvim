@@ -61,7 +61,7 @@ local function command(server, user_opts)
   local opts = user_opts or {}
   local runtime = opts.container_runtime or "docker"
   local workdir = opts.root_dir or vim.fn.getcwd()
-  local volume = workdir..":"..workdir
+  local volume = workdir..":"..workdir..":ro"
 
   local image = opts.image or supported_languages[server].image
   local cmd_builder = opts.cmd or supported_languages[server].cmd
