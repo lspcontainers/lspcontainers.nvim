@@ -22,11 +22,11 @@ local supported_languages = {
     cmd = function (runtime, volume, image)
       local env = vim.api.nvim_eval('environ()')
       local gopath = env.GOPATH or env.HOME.."/go"
-      local gopath_volume = gopath..":"..gopath
+      local gopath_volume = gopath..":"..gopath..":ro"
 
       -- add ':z' to podman volumes to avoid permission denied errors
       if runtime == "podman" then
-       gopath_volume = gopath_volume..":z"
+        gopath_volume = gopath..":"..gopath..":z"
       end
 
       return {
@@ -68,7 +68,7 @@ local function command(server, user_opts)
 
   -- add ':z' to podman volumes to avoid permission denied errors
   if user_opts.container_runtime == "podman" then
-    volume = volume..":z"
+    volume = workdir..":"..workdir..":z"
   end
 
   if not image or not cmd_builder then
