@@ -161,6 +161,24 @@ require'lspconfig'.gopls.setup {
 }
 ```
 
+### powershell_es
+
+ https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#powershell_es
+
+```lua
+require'lspconfig'.pylsp.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  on_new_config = function(new_config, new_root_dir)
+    new_config.cmd = require'lspcontainers'.command(server, {root_dir = new_root_dir})
+  end,
+  cmd = require'lspcontainers'.command(server),
+  filetypes = {"ps1", "psm1", "psd1"},
+  ...
+}
+```
+
 ### pylsp
 
 https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#pylsp

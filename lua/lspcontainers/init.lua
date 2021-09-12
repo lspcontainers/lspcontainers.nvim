@@ -19,6 +19,7 @@ local supported_languages = {
   jsonls = { image = "lspcontainers/json-language-server:1.3.4", cmd = default_cmd },
   gopls = { image = "lspcontainers/gopls:0.6.11", cmd = default_cmd },
   html = { image = "lspcontainers/html-language-server:1.4.0", cmd = default_cmd },
+  powershell_es = { image = "lspcontainers/powershell-language-server:2.5.1", cmd = default_cmd },
   pylsp = { image = "lspcontainers/python-lsp-server:1.1.0", cmd = default_cmd },
   pyright = { image = "lspcontainers/pyright-langserver:1.1.137", cmd = default_cmd },
   rust_analyzer = { image = "lspcontainers/rust-analyzer:2021-05-03", cmd = default_cmd },
