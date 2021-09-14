@@ -166,7 +166,7 @@ require'lspconfig'.gopls.setup {
  https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#powershell_es
 
 ```lua
-require'lspconfig'.pylsp.setup {
+require'lspconfig'.powershell_es.setup {
   before_init = function(params)
     params.processId = vim.NIL
   end,
