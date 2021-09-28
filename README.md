@@ -69,6 +69,7 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [dockerls](#dockerls)
 - [gopls](#gopls)
 - [html](#html)
+- [powershell_es](#powershell_es)
 - [pylsp](#pylsp)
 - [pyright](#pyright)
 - [rust_analyzer](#rust_analyzer)
