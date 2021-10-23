@@ -1,5 +1,5 @@
 -- default command to run the lsp container
-local default_cmd = function (runtime, workdir, image)
+local default_cmd = function (runtime, workdir, image, network)
 
   if vim.fn.has("win32") then
     workdir = Dos2UnixSafePath(workdir)
@@ -13,6 +13,7 @@ local default_cmd = function (runtime, workdir, image)
     "run",
     "--interactive",
     "--rm",
+    "--network="..network,
     "--workdir="..workdir,
     "--volume="..volume,
     image
@@ -25,7 +26,7 @@ local supported_languages = {
   dockerls = { image = "lspcontainers/docker-language-server:0.4.1" },
   gopls = {
     image = "lspcontainers/gopls:0.6.11",
-    cmd = function (runtime, workdir, image)
+    cmd = function (runtime, workdir, image, network)
       local volume = workdir..":"..workdir
       local env = vim.api.nvim_eval('environ()')
       local gopath = env.GOPATH or env.HOME.."/go"
@@ -43,14 +44,15 @@ local supported_languages = {
         "run",
         "--interactive",
         "--rm",
-        "--volume",
-        volume,
-        "--volume",
-        gopath_volume,
+        "--workdir="..workdir,
+        "--volume="..volume,
+        "--network="..network,
+        "--volume="..gopath_volume,
         "-e GOPATH="..gopath,
         image
       }
-    end
+    end,
+    network="bridge",
   },
   html = { image = "lspcontainers/html-language-server:1.4.0" },
   intelephense = { image = "lspcontainers/intelephense:1.7.1" },
@@ -75,6 +77,7 @@ local function command(server, user_opts)
     container_runtime = "docker",
     root_dir = vim.fn.getcwd(),
     cmd_builder = default_cmd,
+    network = "none",
   }
 
   -- If the LSP is known, it override the defaults:
@@ -92,7 +95,7 @@ local function command(server, user_opts)
     return 1
   end
 
-  return opts.cmd_builder(opts.container_runtime, opts.root_dir, opts.image)
+  return opts.cmd_builder(opts.container_runtime, opts.root_dir, opts.image, opts.network)
 end
 
 Dos2UnixSafePath = function(workdir)
