@@ -31,7 +31,8 @@ local supported_languages = {
   tsserver = { image = "lspcontainers/typescript-language-server:0.5.1", cmd = default_cmd },
   yamlls = { image = "lspcontainers/yaml-language-server:0.18.0", cmd = default_cmd },
   vuels = { image = "lspcontainers/vue-language-server:0.7.2", cmd = default_cmd },
-  intelephense = { image = "lspcontainers/intelephense:1.7.1", cmd = default_cmd }
+  intelephense = { image = "lspcontainers/intelephense:1.7.1", cmd = default_cmd },
+  omnisharp = { image = "lspcontainers/csharp-language-server:1.37.14", cmd = default_cmd }
 }
 
 local function command(server, user_opts)
