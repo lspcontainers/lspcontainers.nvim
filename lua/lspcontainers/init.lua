@@ -1,13 +1,15 @@
 -- default command to run the lsp container
-local default_cmd = function (runtime, volume, image)
+local default_cmd = function (runtime, workdir, image)
+  local volume = workdir..":"..workdir..":ro"
+
   return {
     runtime,
     "container",
     "run",
     "--interactive",
     "--rm",
-    "--volume",
-    volume,
+    "--workdir="..workdir,
+    "--volume="..volume,
     image
   }
 end
@@ -36,7 +38,6 @@ local function command(server, user_opts)
   local opts = user_opts or {}
 
   local workdir = opts.root_dir or vim.fn.getcwd()
-  local volume = workdir..":"..workdir..":ro"
 
   local additional_languages = opts.additional_languages or {}
   local image = nil
@@ -55,7 +56,7 @@ local function command(server, user_opts)
     return 1
   end
 
-  return cmd_builder(runtime, volume, image)
+  return cmd_builder(runtime, workdir, image)
 end
 
 return {
