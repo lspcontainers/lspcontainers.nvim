@@ -91,6 +91,22 @@ lspconfig.gopls.setup {
 }
 ```
 
+### Network support
+
+By default, LSPs that don't require network access run with `network=none`.
+This means the container has not network access. If you have a special case
+where an LSP needs network access, you can specify this explicitly:
+
+```lua
+cmd = lspcontainers.command('mylsp', {
+  -- ...
+  network = "bridge",
+}),
+```
+
+If you find that an LSP that commonly requires network access doesn't have this
+by default, please open a PR updating its default (see `init.lua`).
+
 ## Process Id
 
 The LSP spec allows a client to sent its process id to a language server, so
