@@ -1,13 +1,15 @@
 -- default command to run the lsp container
-local default_cmd = function (runtime, volume, image)
+local default_cmd = function (runtime, workdir, image)
+  local volume = workdir..":"..workdir..":ro"
+
   return {
     runtime,
     "container",
     "run",
     "--interactive",
     "--rm",
-    "--volume",
-    volume,
+    "--workdir="..workdir,
+    "--volume="..volume,
     image
   }
 end
@@ -45,28 +47,30 @@ local supported_languages = {
     end
   },
   html = { image = "lspcontainers/html-language-server:1.4.0", cmd = default_cmd },
+  intelephense = { image = "lspcontainers/intelephense:1.7.1", cmd = default_cmd },
+  jsonls = { image = "lspcontainers/json-language-server:1.3.4", cmd = default_cmd },
+  omnisharp = { image = "lspcontainers/csharp-language-server:1.37.14", cmd = default_cmd },
+  powershell_es = { image = "lspcontainers/powershell-language-server:2.5.1", cmd = default_cmd },
   pylsp = { image = "lspcontainers/python-lsp-server:1.1.0", cmd = default_cmd },
   pyright = { image = "lspcontainers/pyright-langserver:1.1.137", cmd = default_cmd },
   rust_analyzer = { image = "lspcontainers/rust-analyzer:2021-05-03", cmd = default_cmd },
+  solargraph = { image = "lspcontainers/solargraph:0.43.0", cmd = default_cmd },
   svelte = { image = "lspcontainers/svelte-language-server:0.14.3", cmd = default_cmd },
-  terraformls = { image = "lspcontainers/terraform-ls:0.19.1", cmd = default_cmd },
   sumneko_lua = { image = "lspcontainers/lua-language-server:1.20.5", cmd = default_cmd },
+  terraformls = { image = "lspcontainers/terraform-ls:0.19.1", cmd = default_cmd },
   tsserver = { image = "lspcontainers/typescript-language-server:0.5.1", cmd = default_cmd },
   yamlls = { image = "lspcontainers/yaml-language-server:0.18.0", cmd = default_cmd },
-  vuels = { image = "lspcontainers/vue-language-server:0.7.2", cmd = default_cmd },
-  intelephense = { image = "lspcontainers/intelephense:1.7.1", cmd = default_cmd }
+  vuels = { image = "lspcontainers/vue-language-server:0.7.2", cmd = default_cmd }
 }
 
 local function command(server, user_opts)
   local opts = user_opts or {}
   local runtime = opts.container_runtime or "docker"
   local workdir = opts.root_dir or vim.fn.getcwd()
-  local volume = workdir..":"..workdir..":ro"
 
   local image = opts.image or supported_languages[server].image
   local cmd_builder = opts.cmd or supported_languages[server].cmd
 
-  -- add ':z' to podman volumes to avoid permission denied errors
   if user_opts.container_runtime == "podman" then
     volume = workdir..":"..workdir..":z"
   end
@@ -76,7 +80,7 @@ local function command(server, user_opts)
     return 1
   end
 
-  return cmd_builder(runtime, volume, image)
+  return cmd_builder(runtime, workdir, image)
 end
 
 return {

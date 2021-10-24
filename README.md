@@ -97,20 +97,23 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 
 - [bashls](#bashls)
 - [clangd](#clangd)
-- [jsonls](#jsonls)
 - [dockerls](#dockerls)
 - [gopls](#gopls)
 - [html](#html)
+- [intelephense](#intelephense)
+- [jsonls](#jsonls)
+- [omnisharp](#omnisharp)
+- [powershell_es](#powershell_es)
 - [pylsp](#pylsp)
 - [pyright](#pyright)
 - [rust_analyzer](#rust_analyzer)
+- [solargraph](#solargraph)
+- [sumneko_lua](#sumneko_lua)
 - [svelte](#svelte)
 - [terraformls](#terraformls)
-- [sumneko_lua](#sumneko_lua)
 - [tsserver](#tsserver)
 - [yamlls](#yamlls)
 - [vuels](#vuels)
-- [intelephense](#intelephense)
 
 ### bashls
 
@@ -134,21 +137,6 @@ https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#clangd
 ```lua
 require'lspconfig'.clangd.setup {
   cmd = require'lspcontainers'.command('clangd'),
-  ...
-}
-```
-
-### jsonls
-
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#jsonls
-
-```lua
-require'lspconfig'.jsonls.setup {
-  before_init = function(params)
-    params.processId = vim.NIL
-  end,
-  cmd = require'lspcontainers'.command('jsonls'),
-  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
   ...
 }
 ```
@@ -181,7 +169,6 @@ require'lspconfig'.gopls.setup {
 
 ### html
 
-
 ```lua
 require'lspconfig'.gopls.setup {
   before_init = function(params)
@@ -189,6 +176,69 @@ require'lspconfig'.gopls.setup {
   end,
   cmd = require'lspcontainers'.command('html'),
   root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  ...
+}
+```
+
+### intelephense
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#intelephense
+
+```lua
+require'lspconfig'.intelephense.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('intelephense'),
+  root_dir = util.root_pattern("composer.json", ".git", vim.fn.getcwd()),
+  ...
+}
+```
+
+### jsonls
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#jsonls
+
+```lua
+require'lspconfig'.jsonls.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('jsonls'),
+  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  ...
+}
+```
+
+### omnisharp
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#omnisharp
+
+```lua
+require'lspconfig'.omnisharp.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('omnisharp'),
+  root_dir = util.root_pattern("*.sln", "*.csproj", vim.fn.getcwd()),
+  ...
+}
+```
+
+### powershell_es
+
+ https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#powershell_es
+
+```lua
+require'lspconfig'.powershell_es.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  on_new_config = function(new_config, new_root_dir)
+    new_config.cmd = require'lspcontainers'.command(server, {root_dir = new_root_dir})
+  end,
+  cmd = require'lspcontainers'.command(server),
+  filetypes = {"ps1", "psm1", "psd1"},
   ...
 }
 ```
@@ -226,6 +276,17 @@ https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
 ```lua
 require'lspconfig'.rust_analyzer.setup {
   cmd = require'lspcontainers'.command('rust_analyzer'),
+  ...
+}
+```
+
+### solargraph
+
+https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#solargraph
+
+```lua
+require'lspconfig'.solargraph.setup {
+  cmd = require'lspcontainers'.command('solargraph'),
   ...
 }
 ```
@@ -310,21 +371,6 @@ require'lspconfig'.vuels.setup {
   end,
   cmd = require'lspcontainers'.command('vuels'),
   root_dir = util.root_pattern(".git", vim.fn.getcwd()),
-  ...
-}
-```
-
-### intelephense
-
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#intelephense
-
-```lua
-require'lspconfig'.intelephense.setup {
-  before_init = function(params)
-    params.processId = vim.NIL
-  end,
-  cmd = require'lspcontainers'.command('intelephense'),
-  root_dir = util.root_pattern("composer.json", ".git", vim.fn.getcwd()),
   ...
 }
 ```
