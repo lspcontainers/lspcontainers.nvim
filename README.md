@@ -34,17 +34,34 @@ Provide a simple method for running language servers in Docker containers using 
 
 ### Additional Languages
 
-You can add the default LSPs through the `additional_languages` shown below:
+You can add configurations to more languages my providing an image and the command to start the container by adding following options to lspcontainers commands:
 
 > NOTE: LspContainers makes no attempt to modify LspConfig. It is up to the end user to correctly configure LspConfig.
 
 ```lua
-require'lspcontainers'.command("lua", {
-  additional_languages = {
-    lua = "lspcontainers/lua-language-server:1.20.5"
-  }
-})
+lspconfig.html.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = lspcontainers.command('html', {
+	image = "lspcontainers/html-language-server:1.4.0",
+	cmd = function (runtime, volume, image)
+      return {
+        runtime,
+        "container",
+        "run",
+        "--interactive",
+        "--rm",
+        "--volume",
+        volume,
+        image
+      }
+    end,
+  }),
+  root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
+}
 ```
+
+The `cmd` option of the lspcontainers config also allows modification of the command that is used to start the container for possibly mounting additional volumes or similar things.
 
 ### Volume Syncing
 
@@ -56,6 +73,21 @@ require'lspconfig'[server].setup{
   on_new_config = function(new_config, new_root_dir)
     new_config.cmd = require'lspcontainers'.command(server, { root_dir = new_root_dir })
   end
+}
+```
+
+### Podman Support
+
+If you are using podman instead of docker it is sufficient to just specify "podman" as `container_runtime`:
+
+```lua
+lspconfig.gopls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = lspcontainers.command('gopls', {
+    container_runtime = "podman",
+  }),
+  root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
 }
 ```
 
