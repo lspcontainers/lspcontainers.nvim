@@ -70,7 +70,7 @@ local function command(server, user_opts)
   local image = opts.image or supported_languages[server].image
   local cmd_builder = opts.cmd or supported_languages[server].cmd
 
-  if user_opts.container_runtime == "podman" then
+  if opts.container_runtime == "podman" then
     volume = workdir..":"..workdir..":z"
   end
 
