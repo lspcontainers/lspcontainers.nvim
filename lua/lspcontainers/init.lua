@@ -1,5 +1,10 @@
 -- default command to run the lsp container
 local default_cmd = function (runtime, workdir, image)
+
+  if vim.fn.has("win32") then
+    workdir = Dos2UnixSafePath(workdir)
+  end
+
   local volume = workdir..":"..workdir..":ro"
 
   return {
@@ -80,6 +85,13 @@ local function command(server, user_opts)
   end
 
   return cmd_builder(runtime, workdir, image)
+end
+
+Dos2UnixSafePath = function(workdir)
+  workdir = string.gsub(workdir, ":", "")
+  workdir = string.gsub(workdir, "\\", "/")
+  workdir = "/" .. workdir
+  return workdir
 end
 
 return {
