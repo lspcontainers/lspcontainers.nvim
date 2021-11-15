@@ -15,9 +15,9 @@ local default_cmd = function (runtime, workdir, image)
 end
 
 local supported_languages = {
-  bashls = { image = "lspcontainers/bash-language-server:1.17.0", cmd = default_cmd },
-  clangd = { image = "lspcontainers/clangd-language-server:11.1.0", cmd = default_cmd },
-  dockerls = { image = "lspcontainers/docker-language-server:0.4.1", cmd = default_cmd },
+  bashls = { image = "lspcontainers/bash-language-server:1.17.0" },
+  clangd = { image = "lspcontainers/clangd-language-server:11.1.0" },
+  dockerls = { image = "lspcontainers/docker-language-server:0.4.1" },
   gopls = {
     image = "lspcontainers/gopls:0.6.11",
     cmd = function (runtime, volume, image)
@@ -45,21 +45,21 @@ local supported_languages = {
       }
     end
   },
-  html = { image = "lspcontainers/html-language-server:1.4.0", cmd = default_cmd },
-  intelephense = { image = "lspcontainers/intelephense:1.7.1", cmd = default_cmd },
-  jsonls = { image = "lspcontainers/json-language-server:1.3.4", cmd = default_cmd },
-  omnisharp = { image = "lspcontainers/csharp-language-server:1.37.14", cmd = default_cmd },
-  powershell_es = { image = "lspcontainers/powershell-language-server:2.5.1", cmd = default_cmd },
-  pylsp = { image = "lspcontainers/python-lsp-server:1.1.0", cmd = default_cmd },
-  pyright = { image = "lspcontainers/pyright-langserver:1.1.137", cmd = default_cmd },
-  rust_analyzer = { image = "lspcontainers/rust-analyzer:2021-05-03", cmd = default_cmd },
-  solargraph = { image = "lspcontainers/solargraph:0.43.0", cmd = default_cmd },
-  svelte = { image = "lspcontainers/svelte-language-server:0.14.3", cmd = default_cmd },
-  sumneko_lua = { image = "lspcontainers/lua-language-server:2.4.2", cmd = default_cmd },
-  terraformls = { image = "lspcontainers/terraform-ls:0.19.1", cmd = default_cmd },
-  tsserver = { image = "lspcontainers/typescript-language-server:0.5.1", cmd = default_cmd },
-  yamlls = { image = "lspcontainers/yaml-language-server:0.18.0", cmd = default_cmd },
-  vuels = { image = "lspcontainers/vue-language-server:0.7.2", cmd = default_cmd }
+  html = { image = "lspcontainers/html-language-server:1.4.0" },
+  intelephense = { image = "lspcontainers/intelephense:1.7.1" },
+  jsonls = { image = "lspcontainers/json-language-server:1.3.4" },
+  omnisharp = { image = "lspcontainers/csharp-language-server:1.37.14" },
+  powershell_es = { image = "lspcontainers/powershell-language-server:2.5.1" },
+  pylsp = { image = "lspcontainers/python-lsp-server:1.1.0" },
+  pyright = { image = "lspcontainers/pyright-langserver:1.1.137" },
+  rust_analyzer = { image = "lspcontainers/rust-analyzer:2021-05-03" },
+  solargraph = { image = "lspcontainers/solargraph:0.43.0" },
+  svelte = { image = "lspcontainers/svelte-language-server:0.14.3" },
+  sumneko_lua = { image = "lspcontainers/lua-language-server:2.4.2" },
+  terraformls = { image = "lspcontainers/terraform-ls:0.19.1" },
+  tsserver = { image = "lspcontainers/typescript-language-server:0.5.1" },
+  yamlls = { image = "lspcontainers/yaml-language-server:0.18.0" },
+  vuels = { image = "lspcontainers/vue-language-server:0.7.2" }
 }
 
 local function command(server, user_opts)
@@ -68,7 +68,7 @@ local function command(server, user_opts)
   local workdir = opts.root_dir or vim.fn.getcwd()
 
   local image = opts.image or supported_languages[server].image
-  local cmd_builder = opts.cmd or supported_languages[server].cmd
+  local cmd_builder = opts.cmd or supported_languages[server].cmd or default_cmd
 
   if opts.container_runtime == "podman" then
     volume = workdir..":"..workdir..":z"
