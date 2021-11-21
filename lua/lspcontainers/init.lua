@@ -65,19 +65,29 @@ local supported_languages = {
 }
 
 local function command(server, user_opts)
-  local opts = user_opts or {}
-  local runtime = opts.container_runtime or "docker"
-  local workdir = opts.root_dir or vim.fn.getcwd()
+  -- Start out with the default values:
+  local opts =  {
+    container_runtime = "docker",
+    root_dir = vim.fn.getcwd(),
+    cmd_builder = default_cmd,
+  }
 
-  local image = opts.image or supported_languages[server].image
-  local cmd_builder = opts.cmd or supported_languages[server].cmd or default_cmd
+  -- If the LSP is known, it override the defaults:
+  if supported_languages[server] ~= nil then
+    opts = vim.tbl_extend("force", opts, supported_languages[server])
+  end
 
-  if not image or not cmd_builder then
-    error(string.format("lspcontainers: language not supported `%s`", server))
+  -- If any opts were passed, those override the defaults:
+  if user_opts ~= nil then
+    opts = vim.tbl_extend("force", opts, user_opts)
+  end
+
+  if not opts.image then
+    error(string.format("lspcontainers: no image specified for `%s`", server))
     return 1
   end
 
-  return cmd_builder(runtime, workdir, image)
+  return opts.cmd_builder(opts.container_runtime, opts.root_dir, opts.image)
 end
 
 return {
