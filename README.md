@@ -91,6 +91,34 @@ lspconfig.gopls.setup {
 }
 ```
 
+## Process Id
+
+The LSP spec allows a client to sent its process id to a language server, so
+that the server can exit immediately when it detects that the client is no
+longer running.
+
+This feature fails to work properly no a containerised language server because
+the host and the container do not share the container namespace by default.
+
+A container can share a process namespace with the host by passing passing the
+`--pid=host` flag to docker/podman, although it should be noted that this
+somewhat reduces isolation.
+
+It is also possible to simply disabling the process id detection. This can be
+done with the following `before_init` function:
+
+```
+require'lspconfig'.bashls.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('bashls'),
+}
+```
+
+This is **required** for several LSPs, and the will exit immediately if this is
+not specified.
+
 ## Supported LSPs
 
 Below is a list of supported language servers for configuration with `nvim-lspconfig`. Follow a link to find documentation for that config.
