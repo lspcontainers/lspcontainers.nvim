@@ -20,7 +20,8 @@ local supported_languages = {
   dockerls = { image = "lspcontainers/docker-language-server:0.4.1" },
   gopls = {
     image = "lspcontainers/gopls:0.6.11",
-    cmd = function (runtime, volume, image)
+    cmd = function (runtime, workdir, image)
+      local volume = workdir..":"..workdir
       local env = vim.api.nvim_eval('environ()')
       local gopath = env.GOPATH or env.HOME.."/go"
       local gopath_volume = gopath..":"..gopath..":ro"
@@ -28,6 +29,7 @@ local supported_languages = {
       -- add ':z' to podman volumes to avoid permission denied errors
       if runtime == "podman" then
         gopath_volume = gopath..":"..gopath..":z"
+        volume = volume..":z"
       end
 
       return {
@@ -69,10 +71,6 @@ local function command(server, user_opts)
 
   local image = opts.image or supported_languages[server].image
   local cmd_builder = opts.cmd or supported_languages[server].cmd or default_cmd
-
-  if opts.container_runtime == "podman" then
-    volume = workdir..":"..workdir..":z"
-  end
 
   if not image or not cmd_builder then
     error(string.format("lspcontainers: language not supported `%s`", server))
