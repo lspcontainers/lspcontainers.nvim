@@ -5,7 +5,7 @@ local default_cmd = function (runtime, workdir, image, network)
     workdir = Dos2UnixSafePath(workdir)
   end
 
-  local volume = workdir..":"..workdir..":ro"
+  local volume = workdir..":"..workdir
 
   return {
     runtime,
@@ -25,12 +25,11 @@ local supported_languages = {
   clangd = { image = "lspcontainers/clangd-language-server:11.1.0" },
   dockerls = { image = "lspcontainers/docker-language-server:0.4.1" },
   gopls = {
-    image = "lspcontainers/gopls:0.6.11",
-    cmd = function (runtime, workdir, image, network)
+    cmd_builder = function (runtime, workdir, image, network)
       local volume = workdir..":"..workdir
       local env = vim.api.nvim_eval('environ()')
       local gopath = env.GOPATH or env.HOME.."/go"
-      local gopath_volume = gopath..":"..gopath..":ro"
+      local gopath_volume = gopath..":"..gopath
 
       -- add ':z' to podman volumes to avoid permission denied errors
       if runtime == "podman" then
@@ -42,16 +41,18 @@ local supported_languages = {
         runtime,
         "container",
         "run",
+        "--env",
+        "GOPATH="..gopath,
         "--interactive",
+        "--network="..network,
         "--rm",
         "--workdir="..workdir,
         "--volume="..volume,
-        "--network="..network,
         "--volume="..gopath_volume,
-        "-e GOPATH="..gopath,
         image
       }
     end,
+    image = "lspcontainers/gopls:0.6.11",
     network="bridge",
   },
   html = { image = "lspcontainers/html-language-server:1.4.0" },
