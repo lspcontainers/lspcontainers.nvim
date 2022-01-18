@@ -74,7 +74,7 @@ local supported_languages = {
   powershell_es = { image = "lspcontainers/powershell-language-server:2.5.1" },
   pylsp = { image = "lspcontainers/python-lsp-server:1.1.0" },
   pyright = { image = "lspcontainers/pyright-langserver:1.1.137" },
-  rust_analyzer = { image = "lspcontainers/rust-analyzer:2021-05-03" },
+  rust_analyzer = { image = "lspcontainers/rust-analyzer:2022-01-17" },
   solargraph = { image = "lspcontainers/solargraph:0.43.0" },
   svelte = { image = "lspcontainers/svelte-language-server:0.14.3" },
   sumneko_lua = { image = "lspcontainers/lua-language-server:2.4.2" },
