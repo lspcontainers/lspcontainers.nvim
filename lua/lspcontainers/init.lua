@@ -31,6 +31,17 @@ local supported_languages = {
       local gopath = env.GOPATH or env.HOME.."/go"
       local gopath_volume = gopath..":"..gopath
 
+      local group_handle = io.popen("id -g")
+      local user_handle = io.popen("id -u")
+
+      local group_id = string.gsub(group_handle:read("*a"), "%s+", "")
+      local user_id = string.gsub(user_handle:read("*a"), "%s+", "")
+
+      group_handle:close()
+      user_handle:close()
+
+      local user = user_id..":"..group_id
+
       -- add ':z' to podman volumes to avoid permission denied errors
       if runtime == "podman" then
         gopath_volume = gopath..":"..gopath..":z"
@@ -49,10 +60,11 @@ local supported_languages = {
         "--workdir="..workdir,
         "--volume="..volume,
         "--volume="..gopath_volume,
+        "--user="..user,
         image
       }
     end,
-    image = "lspcontainers/gopls:0.6.11",
+    image = "lspcontainers/gopls:0.7.4",
     network="bridge",
   },
   html = { image = "lspcontainers/html-language-server:1.4.0" },
