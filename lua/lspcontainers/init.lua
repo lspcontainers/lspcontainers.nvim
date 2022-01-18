@@ -69,6 +69,7 @@ local supported_languages = {
   },
   html = { image = "lspcontainers/html-language-server:1.4.0" },
   intelephense = { image = "lspcontainers/intelephense:1.7.1" },
+  jedi_language_server = { image = "lspcontainers/jedi-language-server:0.34.1" },
   jsonls = { image = "lspcontainers/json-language-server:1.3.4" },
   omnisharp = { image = "lspcontainers/csharp-language-server:1.37.14" },
   powershell_es = { image = "lspcontainers/powershell-language-server:2.5.1" },
