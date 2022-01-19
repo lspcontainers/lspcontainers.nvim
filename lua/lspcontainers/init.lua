@@ -21,9 +21,9 @@ local default_cmd = function (runtime, workdir, image, network)
 end
 
 local supported_languages = {
-  bashls = { image = "lspcontainers/bash-language-server:1.17.0" },
-  clangd = { image = "lspcontainers/clangd-language-server:11.1.0" },
-  dockerls = { image = "lspcontainers/docker-language-server:0.4.1" },
+  bashls = { image = "lspcontainers/bash-language-server" },
+  clangd = { image = "lspcontainers/clangd-language-server" },
+  dockerls = { image = "lspcontainers/docker-language-server" },
   gopls = {
     cmd_builder = function (runtime, workdir, image, network)
       local volume = workdir..":"..workdir
@@ -64,24 +64,24 @@ local supported_languages = {
         image
       }
     end,
-    image = "lspcontainers/gopls:0.7.4",
+    image = "lspcontainers/gopls",
     network="bridge",
   },
-  html = { image = "lspcontainers/html-language-server:1.4.0" },
-  intelephense = { image = "lspcontainers/intelephense:1.7.1" },
-  jsonls = { image = "lspcontainers/json-language-server:1.3.4" },
-  omnisharp = { image = "lspcontainers/csharp-language-server:1.37.14" },
-  powershell_es = { image = "lspcontainers/powershell-language-server:2.5.1" },
-  pylsp = { image = "lspcontainers/python-lsp-server:1.1.0" },
-  pyright = { image = "lspcontainers/pyright-langserver:1.1.137" },
-  rust_analyzer = { image = "lspcontainers/rust-analyzer:2022-01-17" },
-  solargraph = { image = "lspcontainers/solargraph:0.43.0" },
-  svelte = { image = "lspcontainers/svelte-language-server:0.14.3" },
-  sumneko_lua = { image = "lspcontainers/lua-language-server:2.4.2" },
-  terraformls = { image = "lspcontainers/terraform-ls:0.19.1" },
-  tsserver = { image = "lspcontainers/typescript-language-server:0.5.1" },
-  yamlls = { image = "lspcontainers/yaml-language-server:0.18.0" },
-  vuels = { image = "lspcontainers/vue-language-server:0.7.2" }
+  html = { image = "lspcontainers/html-language-server" },
+  intelephense = { image = "lspcontainers/intelephense" },
+  jsonls = { image = "lspcontainers/json-language-server" },
+  omnisharp = { image = "lspcontainers/csharp-language-server" },
+  powershell_es = { image = "lspcontainers/powershell-language-server" },
+  pylsp = { image = "lspcontainers/python-lsp-server" },
+  pyright = { image = "lspcontainers/pyright-langserver" },
+  rust_analyzer = { image = "lspcontainers/rust-analyzer" },
+  solargraph = { image = "lspcontainers/solargraph" },
+  svelte = { image = "lspcontainers/svelte-language-server" },
+  sumneko_lua = { image = "lspcontainers/lua-language-server" },
+  terraformls = { image = "lspcontainers/terraform-ls" },
+  tsserver = { image = "lspcontainers/typescript-language-server" },
+  yamlls = { image = "lspcontainers/yaml-language-server" },
+  vuels = { image = "lspcontainers/vue-language-server" }
 }
 
 local function command(server, user_opts)
