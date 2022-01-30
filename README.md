@@ -76,6 +76,54 @@ require'lspconfig'[server].setup{
 }
 ```
 
+### Volume Mount
+
+You can either mount a path on host or a docker volume
+
+#### Mount Persistent volume
+You can [created a volume](https://docs.docker.com/engine/reference/commandline/volume_create/) (docker_volume) and mount it at path (workdir).
+
+```bash
+docker create volume persistent_volume_projects
+```
+
+```lua
+require'lspconfig'.omnisharp.setup {
+  capabilities = capabilities,
+  before_init = before_init_process_id_nil,
+  cmd = require'lspcontainers'.command(
+      'omnisharp',
+      {
+          workdir = /projects
+          docker_volume = 'persistent_volume_projects',
+      }
+  ),
+  on_new_config = on_new_config,
+  on_attach = on_attach,
+  root_dir = util.root_pattern("*.sln", vim.fn.getcwd()),
+}
+```
+
+#### Mount Volume from Host
+
+You can mount a volume from your host by just assigning workdir to match the host path.
+
+```lua
+require'lspconfig'.omnisharp.setup {
+  capabilities = capabilities,
+  before_init = before_init_process_id_nil,
+  cmd = require'lspcontainers'.command(
+      'omnisharp',
+      {
+          workdir = /home/[UserName]/projects
+      }
+  ),
+  on_new_config = on_new_config,
+  on_attach = on_attach,
+  root_dir = util.root_pattern("*.sln", vim.fn.getcwd()),
+}
+```
+
 ### Podman Support
 
 If you are using podman instead of docker it is sufficient to just specify "podman" as `container_runtime`:
