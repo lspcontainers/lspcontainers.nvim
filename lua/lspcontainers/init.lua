@@ -52,7 +52,7 @@ local supported_languages = {
   html = { image = "lspcontainers/html-language-server" },
   intelephense = { image = "lspcontainers/intelephense" },
   jsonls = { image = "lspcontainers/json-language-server" },
-  omnisharp = { image = "lspcontainers/csharp-language-server" },
+  omnisharp = { image = "lspcontainers/omnisharp" },
   powershell_es = { image = "lspcontainers/powershell-language-server" },
   pylsp = { image = "lspcontainers/python-lsp-server" },
   pyright = { image = "lspcontainers/pyright-langserver" },
