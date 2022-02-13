@@ -34,7 +34,7 @@ Provide a simple method for running language servers in Docker containers using 
 
 ### Additional Languages
 
-You can add configurations to more languages my providing an image and the command to start the container by adding following options to lspcontainers commands:
+You can add configurations to more languages by providing an image and the command to start the container by adding following options to lspcontainers commands:
 
 > NOTE: LspContainers makes no attempt to modify LspConfig. It is up to the end user to correctly configure LspConfig.
 
