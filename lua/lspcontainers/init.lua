@@ -3,9 +3,9 @@ Config = {
 }
 
 local supported_languages = {
-  bashls = { image = "lspcontainers/bash-language-server" },
-  clangd = { image = "lspcontainers/clangd-language-server" },
-  dockerls = { image = "lspcontainers/docker-language-server" },
+  bashls = { image = "docker.io/lspcontainers/bash-language-server" },
+  clangd = { image = "docker.io/lspcontainers/clangd-language-server" },
+  dockerls = { image = "docker.io/lspcontainers/docker-language-server" },
   gopls = {
     cmd_builder = function (runtime, workdir, image, network)
       local volume = workdir..":"..workdir
@@ -46,24 +46,24 @@ local supported_languages = {
         image
       }
     end,
-    image = "lspcontainers/gopls",
+    image = "docker.io/lspcontainers/gopls",
     network="bridge",
   },
-  html = { image = "lspcontainers/html-language-server" },
-  intelephense = { image = "lspcontainers/intelephense" },
-  jsonls = { image = "lspcontainers/json-language-server" },
-  omnisharp = { image = "lspcontainers/omnisharp" },
-  powershell_es = { image = "lspcontainers/powershell-language-server" },
-  pylsp = { image = "lspcontainers/python-lsp-server" },
-  pyright = { image = "lspcontainers/pyright-langserver" },
-  rust_analyzer = { image = "lspcontainers/rust-analyzer" },
-  solargraph = { image = "lspcontainers/solargraph" },
-  svelte = { image = "lspcontainers/svelte-language-server" },
-  sumneko_lua = { image = "lspcontainers/lua-language-server" },
-  terraformls = { image = "lspcontainers/terraform-ls" },
-  tsserver = { image = "lspcontainers/typescript-language-server" },
-  yamlls = { image = "lspcontainers/yaml-language-server" },
-  vuels = { image = "lspcontainers/vue-language-server" }
+  html = { image = "docker.io/lspcontainers/html-language-server" },
+  intelephense = { image = "docker.io/lspcontainers/intelephense" },
+  jsonls = { image = "docker.io/lspcontainers/json-language-server" },
+  omnisharp = { image = "docker.io/lspcontainers/omnisharp" },
+  powershell_es = { image = "docker.io/lspcontainers/powershell-language-server" },
+  pylsp = { image = "docker.io/lspcontainers/python-lsp-server" },
+  pyright = { image = "docker.io/lspcontainers/pyright-langserver" },
+  rust_analyzer = { image = "docker.io/lspcontainers/rust-analyzer" },
+  solargraph = { image = "docker.io/lspcontainers/solargraph" },
+  svelte = { image = "docker.io/lspcontainers/svelte-language-server" },
+  sumneko_lua = { image = "docker.io/lspcontainers/lua-language-server" },
+  terraformls = { image = "docker.io/lspcontainers/terraform-ls" },
+  tsserver = { image = "docker.io/lspcontainers/typescript-language-server" },
+  yamlls = { image = "docker.io/lspcontainers/yaml-language-server" },
+  vuels = { image = "docker.io/lspcontainers/vue-language-server" }
 }
 
 -- default command to run the lsp container
