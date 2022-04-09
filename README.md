@@ -34,7 +34,7 @@ Provide a simple method for running language servers in Docker containers using 
 
 ### Additional Languages
 
-You can add configurations to more languages my providing an image and the command to start the container by adding following options to lspcontainers commands:
+You can add configurations to more languages by providing an image and the command to start the container by adding following options to lspcontainers commands:
 
 > NOTE: LspContainers makes no attempt to modify LspConfig. It is up to the end user to correctly configure LspConfig.
 
@@ -73,6 +73,54 @@ require'lspconfig'[server].setup{
   on_new_config = function(new_config, new_root_dir)
     new_config.cmd = require'lspcontainers'.command(server, { root_dir = new_root_dir })
   end
+}
+```
+
+### Volume Mount
+
+You can either mount a path on host or a docker volume
+
+#### Mount Persistent volume
+You can [created a volume](https://docs.docker.com/engine/reference/commandline/volume_create/) (docker_volume) and mount it at path (workdir).
+
+```bash
+docker create volume persistent_volume_projects
+```
+
+```lua
+require'lspconfig'.omnisharp.setup {
+  capabilities = capabilities,
+  before_init = before_init_process_id_nil,
+  cmd = require'lspcontainers'.command(
+      'omnisharp',
+      {
+          workdir = /projects
+          docker_volume = 'persistent_volume_projects',
+      }
+  ),
+  on_new_config = on_new_config,
+  on_attach = on_attach,
+  root_dir = util.root_pattern("*.sln", vim.fn.getcwd()),
+}
+```
+
+#### Mount Volume from Host
+
+You can mount a volume from your host by just assigning workdir to match the host path.
+
+```lua
+require'lspconfig'.omnisharp.setup {
+  capabilities = capabilities,
+  before_init = before_init_process_id_nil,
+  cmd = require'lspcontainers'.command(
+      'omnisharp',
+      {
+          workdir = /home/[UserName]/projects
+      }
+  ),
+  on_new_config = on_new_config,
+  on_attach = on_attach,
+  root_dir = util.root_pattern("*.sln", vim.fn.getcwd()),
 }
 ```
 
