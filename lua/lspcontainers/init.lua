@@ -6,6 +6,7 @@ local supported_languages = {
   bashls = { image = "docker.io/lspcontainers/bash-language-server" },
   clangd = { image = "docker.io/lspcontainers/clangd-language-server" },
   dockerls = { image = "docker.io/lspcontainers/docker-language-server" },
+  graphql = { image = "docker.io/lspcontainers/graphql-language-service-cli" },
   gopls = {
     cmd_builder = function (runtime, workdir, image, network)
       local volume = workdir..":"..workdir
