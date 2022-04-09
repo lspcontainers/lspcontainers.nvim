@@ -15,14 +15,14 @@ Provide a simple method for running language servers in Docker containers using 
 2. Install `lspconfig` and `lspcontainers` via package manager
 
 - via `packer` manager
-  
+
   ```lua
   use 'neovim/nvim-lspconfig'
   use 'lspcontainers/lspcontainers.nvim'
   ```
 
 - via `plug` manager
-  
+
   ```vim
   Plug 'neovim/nvim-lspconfig'
   Plug 'lspcontainers/lspcontainers.nvim'
@@ -143,6 +143,7 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [clangd](#clangd)
 - [dockerls](#dockerls)
 - [gopls](#gopls)
+- [graphql](#graphql)
 - [html](#html)
 - [intelephense](#intelephense)
 - [jsonls](#jsonls)
@@ -161,7 +162,7 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 
 ### bashls
 
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#bashls
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bashls
 
 ```lua
 require'lspconfig'.bashls.setup {
@@ -176,7 +177,7 @@ require'lspconfig'.bashls.setup {
 
 ### clangd
 
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#clangd
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clangd
 
 ```lua
 require'lspconfig'.clangd.setup {
@@ -187,7 +188,7 @@ require'lspconfig'.clangd.setup {
 
 ### dockerls
 
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#dockerls
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#dockerls
 
 ```lua
 require'lspconfig'.dockerls.setup {
@@ -202,7 +203,7 @@ require'lspconfig'.dockerls.setup {
 
 ### gopls
 
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#gopls
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
 
 ```lua
 require'lspconfig'.gopls.setup {
@@ -211,10 +212,27 @@ require'lspconfig'.gopls.setup {
 }
 ```
 
-### html
+### graphql
+
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#graphql
 
 ```lua
-require'lspconfig'.gopls.setup {
+require'lspconfig'.graphql.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('graphql'),
+  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  ...
+}
+```
+
+### html
+
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#html
+
+```lua
+require'lspconfig'.html.setup {
   before_init = function(params)
     params.processId = vim.NIL
   end,
@@ -226,7 +244,7 @@ require'lspconfig'.gopls.setup {
 
 ### intelephense
 
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#intelephense
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#intelephense
 
 ```lua
 require'lspconfig'.intelephense.setup {
@@ -241,7 +259,7 @@ require'lspconfig'.intelephense.setup {
 
 ### jsonls
 
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#jsonls
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jsonls
 
 ```lua
 require'lspconfig'.jsonls.setup {
@@ -256,7 +274,7 @@ require'lspconfig'.jsonls.setup {
 
 ### omnisharp
 
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#omnisharp
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#omnisharp
 
 ```lua
 require'lspconfig'.omnisharp.setup {
@@ -271,7 +289,7 @@ require'lspconfig'.omnisharp.setup {
 
 ### powershell_es
 
- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#powershell_es
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#powershell_es
 
 ```lua
 require'lspconfig'.powershell_es.setup {
@@ -289,7 +307,7 @@ require'lspconfig'.powershell_es.setup {
 
 ### pylsp
 
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#pylsp
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
 
 ```lua
 require'lspconfig'.pylsp.setup {
@@ -300,7 +318,7 @@ require'lspconfig'.pylsp.setup {
 
 ### pyright
 
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#pyright
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
 
 ```lua
 require'lspconfig'.pyright.setup {
@@ -315,7 +333,7 @@ require'lspconfig'.pyright.setup {
 
 ### rust_analyzer
 
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
 
 ```lua
 require'lspconfig'.rust_analyzer.setup {
@@ -326,7 +344,7 @@ require'lspconfig'.rust_analyzer.setup {
 
 ### solargraph
 
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#solargraph
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#solargraph
 
 ```lua
 require'lspconfig'.solargraph.setup {
@@ -337,7 +355,7 @@ require'lspconfig'.solargraph.setup {
 
 ### sumneko_lua
 
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#sumneko_lua
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
 
 ```lua
 require'lspconfig'.sumneko_lua.setup {
@@ -348,7 +366,7 @@ require'lspconfig'.sumneko_lua.setup {
 
 ### svelte
 
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#svelte
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#svelte
 
 ```lua
 require'lspconfig'.svelte.setup {
@@ -363,7 +381,7 @@ require'lspconfig'.svelte.setup {
 
 ### terraformls
 
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#terraformls
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#terraformls
 
 ```lua
 require'lspconfig'.terraformls.setup {
@@ -373,10 +391,9 @@ require'lspconfig'.terraformls.setup {
 }
 ```
 
-
 ### tsserver
 
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#tsserver
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
 
 ```lua
 require'lspconfig'.tsserver.setup {
@@ -391,7 +408,7 @@ require'lspconfig'.tsserver.setup {
 
 ### yamlls
 
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#yamlls
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#yamlls
 
 ```lua
 require'lspconfig'.yamlls.setup {
@@ -406,7 +423,7 @@ require'lspconfig'.yamlls.setup {
 
 ### vuels
 
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#vuels
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vuels
 
 ```lua
 require'lspconfig'.vuels.setup {
@@ -418,6 +435,7 @@ require'lspconfig'.vuels.setup {
   ...
 }
 ```
+
 ---
 
 To contribute to LSPs, please see the [lspcontainers/dockerfiles](https://github.com/lspcontainers/dockerfiles) repository.
