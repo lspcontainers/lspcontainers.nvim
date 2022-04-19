@@ -139,15 +139,16 @@ local function on_event(_, data, event)
   end
 end
 
-local function images_pull()
+local function images_pull(runtime)
   local jobs = {}
+  runtime = runtime or "docker"
 
   for idx, server_name in ipairs(Config.ensure_installed) do
     local server = supported_languages[server_name]
 
     local job_id =
       vim.fn.jobstart(
-      "docker image pull "..server['image'],
+      runtime.." image pull "..server['image'],
       {
         on_stderr = on_event,
         on_stdout = on_event,
