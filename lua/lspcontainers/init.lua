@@ -9,10 +9,10 @@ local supported_languages = {
   graphql = { image = "docker.io/lspcontainers/graphql-language-service-cli" },
   gopls = {
     cmd_builder = function (runtime, workdir, image, network)
-      local volume = workdir..":"..workdir
+      local volume = workdir..":"..workdir..":z"
       local env = vim.api.nvim_eval('environ()')
       local gopath = env.GOPATH or env.HOME.."/go"
-      local gopath_volume = gopath..":"..gopath
+      local gopath_volume = gopath..":"..gopath..":z"
 
       local group_handle = io.popen("id -g")
       local user_handle = io.popen("id -u")
@@ -24,12 +24,6 @@ local supported_languages = {
       user_handle:close()
 
       local user = user_id..":"..group_id
-
-      -- add ':z' to podman volumes to avoid permission denied errors
-      if runtime == "podman" then
-        gopath_volume = gopath..":"..gopath..":z"
-        volume = volume..":z"
-      end
 
       return {
         runtime,
@@ -75,9 +69,9 @@ local default_cmd = function (runtime, workdir, image, network, docker_volume)
 
   local mnt_volume
   if docker_volume ~= nil then
-    mnt_volume ="--volume="..docker_volume..":"..workdir
+    mnt_volume ="--volume="..docker_volume..":"..workdir..":z"
   else
-    mnt_volume = "--volume="..workdir..":"..workdir
+    mnt_volume = "--volume="..workdir..":"..workdir..":z"
   end
 
   return {
