@@ -197,6 +197,7 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [jsonls](#jsonls)
 - [omnisharp](#omnisharp)
 - [powershell_es](#powershell_es)
+- [prismals](#prismals)
 - [pylsp](#pylsp)
 - [pyright](#pyright)
 - [rust_analyzer](#rust_analyzer)
@@ -205,8 +206,8 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [svelte](#svelte)
 - [terraformls](#terraformls)
 - [tsserver](#tsserver)
-- [yamlls](#yamlls)
 - [vuels](#vuels)
+- [yamlls](#yamlls)
 
 ### bashls
 
@@ -349,6 +350,21 @@ require'lspconfig'.powershell_es.setup {
   end,
   cmd = require'lspcontainers'.command(server),
   filetypes = {"ps1", "psm1", "psd1"},
+  ...
+}
+```
+
+### prismals
+
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#prismals
+
+```lua
+require'lspconfig'.prismals.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('prismals'),
+  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
   ...
 }
 ```
