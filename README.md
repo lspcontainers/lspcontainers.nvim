@@ -204,6 +204,7 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [solargraph](#solargraph)
 - [sumneko_lua](#sumneko_lua)
 - [svelte](#svelte)
+- [tailwindcss](#tailwindcss)
 - [terraformls](#terraformls)
 - [tsserver](#tsserver)
 - [vuels](#vuels)
@@ -439,6 +440,22 @@ require'lspconfig'.svelte.setup {
   end,
   cmd = require'lspcontainers'.command('svelte'),
   root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  ...
+}
+```
+
+### tailwindcss
+
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tailwindcss
+
+```lua
+require'lspconfig'.tailwindcss.setup {
+  before_init = function(params)
+  	params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('tailwindcss'),
+  filetypes = { "django-html", "htmldjango", "gohtml", "html", "markdown", "php", "css", "postcss", "sass", "scss", "stylus", "javascript", "javascriptreact", "rescript", "typescript", "typescriptreact", "vue", "svelte" },
+  root_dir = util.root_pattern("tailwind.config.js", "tailwind.config.ts", "postcss.config.js", "postcss.config.ts", "package.json", "node_modules", ".git", vim.fn.getcwd()),
   ...
 }
 ```
