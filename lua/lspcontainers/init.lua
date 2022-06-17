@@ -64,7 +64,7 @@ local supported_languages = {
 
 -- default command to run the lsp container
 local default_cmd = function (runtime, workdir, image, network, docker_volume)
-  if vim.fn.has("win32") then
+  if vim.loop.os_uname().sysname == "Windows_NT" then
     workdir = Dos2UnixSafePath(workdir)
   end
 
