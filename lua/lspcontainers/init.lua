@@ -56,6 +56,7 @@ local supported_languages = {
   solargraph = { image = "docker.io/lspcontainers/solargraph" },
   sumneko_lua = { image = "docker.io/lspcontainers/lua-language-server" },
   svelte = { image = "docker.io/lspcontainers/svelte-language-server" },
+  tailwindcss= { image = "docker.io/lspcontainers/tailwindcss-language-server" },
   terraformls = { image = "docker.io/lspcontainers/terraform-ls" },
   tsserver = { image = "docker.io/lspcontainers/typescript-language-server" },
   vuels = { image = "docker.io/lspcontainers/vue-language-server" },
