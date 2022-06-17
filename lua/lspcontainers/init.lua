@@ -181,10 +181,8 @@ local function images_remove()
   print("lspcontainers: All language servers removed")
 end
 
-vim.cmd [[
-  command -nargs=0 LspImagesPull lua require'lspcontainers'.images_pull()
-  command -nargs=0 LspImagesRemove lua require'lspcontainers'.images_remove()
-]]
+vim.api.nvim_create_user_command("LspImagesPull", images_pull, {})
+vim.api.nvim_create_user_command("LspImagesRemove", images_remove, {})
 
 local function setup(options)
   if options['ensure_installed'] then
