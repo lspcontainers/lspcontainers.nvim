@@ -24,6 +24,12 @@ local supported_languages = {
 
       local user = user_id..":"..group_id
 
+      if runtime == "docker" then
+      	network = "bridge"
+      elseif runtime == "podman" then
+		network = "slirp4netns"
+      end
+
       return {
         runtime,
         "container",
@@ -41,7 +47,6 @@ local supported_languages = {
       }
     end,
     image = "docker.io/lspcontainers/gopls",
-    network="bridge",
   },
   graphql = { image = "docker.io/lspcontainers/graphql-language-service-cli" },
   html = { image = "docker.io/lspcontainers/html-language-server" },
