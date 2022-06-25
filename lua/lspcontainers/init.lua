@@ -160,13 +160,14 @@ local function images_pull(runtime)
   print("lspcontainers: Language servers successfully pulled")
 end
 
-local function images_remove()
+local function images_remove(runtime)
   local jobs = {}
+  runtime = runtime or "docker"
 
   for _, v in pairs(supported_languages) do
     local job =
       vim.fn.jobstart(
-      "docker image rm --force "..v['image']..":latest",
+      runtime.." image rm --force "..v['image']..":latest",
       {
         on_stderr = on_event,
         on_stdout = on_event,
