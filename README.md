@@ -124,6 +124,28 @@ require'lspconfig'.omnisharp.setup {
 }
 ```
 
+#### Mount Additional Volumes
+
+You can mount additional volumes to let the lsp server access caches or other directories.
+
+```lua
+require'lspconfig'.rust_analyzer.setup {
+  cmd = require'lspcontainers'.command(
+      'rust_analyzer',
+      {
+        extra_volumes = {
+          '/home/[UserName]/.cargo:/root/.cargo:ro',
+          ...
+        }
+      }
+  ),
+  ...
+}
+```
+
+The property `extra_volumes` recieves a list of strings formated for the `--volume` option of Docker.
+[See reference](https://docs.docker.com/engine/reference/run/#volume-shared-filesystems).
+
 ### Podman Support
 
 If you are using podman instead of docker it is sufficient to just specify "podman" as `container_runtime`:
