@@ -1,5 +1,7 @@
-Config = {
-  ensure_installed = {}
+LspContainersConfig = {
+  ensure_installed = {},
+  runtime = "docker",
+  network = "bridge"
 }
 
 local supported_languages = {
@@ -7,7 +9,7 @@ local supported_languages = {
   clangd = { image = "docker.io/lspcontainers/clangd-language-server" },
   dockerls = { image = "docker.io/lspcontainers/docker-language-server" },
   gopls = {
-    cmd_builder = function (runtime, workdir, image, network)
+    cmd_builder = function (workdir, image, network)
       local volume = workdir..":"..workdir..":z"
       local env = vim.api.nvim_eval('environ()')
       local gopath = env.GOPATH or env.HOME.."/go"
@@ -24,14 +26,14 @@ local supported_languages = {
 
       local user = user_id..":"..group_id
 
-      if runtime == "docker" then
+      if LspContainersConfig.runtime == "docker" then
       	network = "bridge"
-      elseif runtime == "podman" then
+      elseif LspContainersConfig.runtime == "podman" then
 		network = "slirp4netns"
       end
 
       return {
-        runtime,
+        LspContainersConfig.runtime,
         "container",
         "run",
         "--env",
@@ -69,7 +71,7 @@ local supported_languages = {
 }
 
 -- default command to run the lsp container
-local default_cmd = function (runtime, workdir, image, network, docker_volume)
+local default_cmd = function (workdir, image, wantNetwork, docker_volume)
   if vim.loop.os_uname().sysname == "Windows_NT" then
     workdir = Dos2UnixSafePath(workdir)
   end
@@ -81,13 +83,18 @@ local default_cmd = function (runtime, workdir, image, network, docker_volume)
     mnt_volume = "--volume="..workdir..":"..workdir..":z"
   end
 
+  local n = "none"
+  if wantNetwork then
+    n = LspContainersConfig.network
+  end
+
   return {
-    runtime,
+    LspContainersConfig.runtime,
     "container",
     "run",
     "--interactive",
     "--rm",
-    "--network="..network,
+    "--network="..n,
     "--workdir="..workdir,
     mnt_volume,
     image
@@ -97,10 +104,9 @@ end
 local function command(server, user_opts)
   -- Start out with the default values:
   local opts =  {
-    container_runtime = "docker",
     root_dir = vim.fn.getcwd(),
     cmd_builder = default_cmd,
-    network = "none",
+    wantNetwork = false,
     docker_volume = nil,
   }
 
@@ -119,7 +125,7 @@ local function command(server, user_opts)
     return 1
   end
 
-  return opts.cmd_builder(opts.container_runtime, opts.root_dir, opts.image, opts.network, opts.docker_volume)
+  return opts.cmd_builder(opts.root_dir, opts.image, opts.wantNetwork, opts.docker_volume)
 end
 
 Dos2UnixSafePath = function(workdir)
@@ -140,16 +146,15 @@ local function on_event(_, data, event)
   end
 end
 
-local function images_pull(runtime)
+local function images_pull()
   local jobs = {}
-  runtime = runtime or "docker"
 
-  for idx, server_name in ipairs(Config.ensure_installed) do
+  for idx, server_name in ipairs(LspContainersConfig.ensure_installed) do
     local server = supported_languages[server_name]
 
     local job_id =
       vim.fn.jobstart(
-      runtime.." image pull "..server['image'],
+      LspContainersConfig.runtime.." image pull "..server['image'],
       {
         on_stderr = on_event,
         on_stdout = on_event,
@@ -165,14 +170,13 @@ local function images_pull(runtime)
   print("lspcontainers: Language servers successfully pulled")
 end
 
-local function images_remove(runtime)
+local function images_remove()
   local jobs = {}
-  runtime = runtime or "docker"
 
   for _, v in pairs(supported_languages) do
     local job =
       vim.fn.jobstart(
-      runtime.." image rm --force "..v['image']..":latest",
+      LspContainersConfig.runtime.." image rm --force "..v['image']..":latest",
       {
         on_stderr = on_event,
         on_stdout = on_event,
@@ -193,7 +197,13 @@ vim.api.nvim_create_user_command("LspImagesRemove", images_remove, {})
 
 local function setup(options)
   if options['ensure_installed'] then
-    Config.ensure_installed = options['ensure_installed']
+    LspContainersConfig.ensure_installed = options['ensure_installed']
+  end
+  if options['runtime'] then
+    LspContainersConfig.runtime = options['runtime']
+  end
+  if options['network'] then
+    LspContainersConfig.network = options['network']
   end
 end
 

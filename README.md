@@ -10,7 +10,7 @@ Provide a simple method for running language servers in Docker containers using 
 
 ## Installation
 
-1. Install latest [Docker Engine](https://docs.docker.com/engine/install/) for your operating system
+1. Install latest [Docker Engine](https://docs.docker.com/engine/install/) or [Podman](https://podman.io/) for your operating system
 
 2. Install `lspconfig` and `lspcontainers` via package manager
 
@@ -28,6 +28,8 @@ Provide a simple method for running language servers in Docker containers using 
   Plug 'lspcontainers/lspcontainers.nvim'
   ```
 
+- [configure your runtime](#podman-support) if you are using something other than docker
+
 3. Setup the language of your choice from [Supported LSPs](#supported-lsps)
 
 ## Advanced Configuration
@@ -43,19 +45,31 @@ lspconfig.html.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   cmd = lspcontainers.command('html', {
-	image = "lspcontainers/html-language-server:1.4.0",
-	cmd = function (runtime, volume, image)
+    image = "lspcontainers/html-language-server:1.4.0",
+    cmd = function (workdir, image, network, docker_volume)
+      if vim.loop.os_uname().sysname == "Windows_NT" then
+        workdir = Dos2UnixSafePath(workdir)
+      end
+
+      local mnt_volume
+      if docker_volume ~= nil then
+        mnt_volume ="--volume="..docker_volume..":"..workdir..":z"
+      else
+        mnt_volume = "--volume="..workdir..":"..workdir..":z"
+      end
+
       return {
-        runtime,
+        LspContainersConfig.runtime,
         "container",
         "run",
         "--interactive",
         "--rm",
-        "--volume",
-        volume,
+        "--network="..network,
+        "--workdir="..workdir,
+        mnt_volume,
         image
       }
-    end,
+    end
   }),
   root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
 }
@@ -81,6 +95,7 @@ require'lspconfig'[server].setup{
 You can either mount a path on host or a docker volume
 
 #### Mount Persistent volume
+
 You can [created a volume](https://docs.docker.com/engine/reference/commandline/volume_create/) (docker_volume) and mount it at path (workdir).
 
 ```bash
@@ -126,17 +141,11 @@ require'lspconfig'.omnisharp.setup {
 
 ### Podman Support
 
-If you are using podman instead of docker it is sufficient to just specify "podman" as `container_runtime`:
+If you are using podman or any other docker API compatible runtime the default `docker` runtime can
+be overwritten during setup:
 
 ```lua
-lspconfig.gopls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = lspcontainers.command('gopls', {
-    container_runtime = "podman",
-  }),
-  root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
-}
+require'lspcontainers'.setup({ runtime = "podman" })
 ```
 
 ### Network support
