@@ -21,7 +21,7 @@
           configure = {
             customRC = ''
               lua << EOF
-                ${(builtins.readFile ./test/init.lua)};
+                ${(builtins.readFile ./init.lua)};
               EOF
             '';
             packages.main = with pkgs.${system}.vimPlugins; {
