@@ -57,7 +57,7 @@ lspconfig.html.setup {
       }
     end,
   }),
-  root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
+  root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
 }
 ```
 
@@ -100,7 +100,7 @@ require'lspconfig'.omnisharp.setup {
   ),
   on_new_config = on_new_config,
   on_attach = on_attach,
-  root_dir = util.root_pattern("*.sln", vim.fn.getcwd()),
+  root_dir = require'lspconfig/util'.root_pattern("*.sln", vim.fn.getcwd()),
 }
 ```
 
@@ -120,7 +120,7 @@ require'lspconfig'.omnisharp.setup {
   ),
   on_new_config = on_new_config,
   on_attach = on_attach,
-  root_dir = util.root_pattern("*.sln", vim.fn.getcwd()),
+  root_dir = require'lspconfig/util'.root_pattern("*.sln", vim.fn.getcwd()),
 }
 ```
 
@@ -135,7 +135,7 @@ lspconfig.gopls.setup {
   cmd = lspcontainers.command('gopls', {
     container_runtime = "podman",
   }),
-  root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
+  root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
 }
 ```
 
@@ -220,7 +220,7 @@ require'lspconfig'.bashls.setup {
     params.processId = vim.NIL
   end,
   cmd = require'lspcontainers'.command('bashls'),
-  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
   ...
 }
 ```
@@ -246,7 +246,7 @@ require'lspconfig'.dockerls.setup {
     params.processId = vim.NIL
   end,
   cmd = require'lspcontainers'.command('dockerls'),
-  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
   ...
 }
 ```
@@ -272,7 +272,7 @@ require'lspconfig'.graphql.setup {
     params.processId = vim.NIL
   end,
   cmd = require'lspcontainers'.command('graphql'),
-  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
   ...
 }
 ```
@@ -287,7 +287,7 @@ require'lspconfig'.html.setup {
     params.processId = vim.NIL
   end,
   cmd = require'lspcontainers'.command('html'),
-  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
   ...
 }
 ```
@@ -302,7 +302,7 @@ require'lspconfig'.intelephense.setup {
     params.processId = vim.NIL
   end,
   cmd = require'lspcontainers'.command('intelephense'),
-  root_dir = util.root_pattern("composer.json", ".git", vim.fn.getcwd()),
+  root_dir = require'lspconfig/util'.root_pattern("composer.json", ".git", vim.fn.getcwd()),
   ...
 }
 ```
@@ -317,7 +317,7 @@ require'lspconfig'.jsonls.setup {
     params.processId = vim.NIL
   end,
   cmd = require'lspcontainers'.command('jsonls'),
-  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
   ...
 }
 ```
@@ -332,7 +332,7 @@ require'lspconfig'.omnisharp.setup {
     params.processId = vim.NIL
   end,
   cmd = require'lspcontainers'.command('omnisharp'),
-  root_dir = util.root_pattern("*.sln", "*.csproj", vim.fn.getcwd()),
+  root_dir = require'lspconfig/util'.root_pattern("*.sln", "*.csproj", vim.fn.getcwd()),
   ...
 }
 ```
@@ -365,7 +365,7 @@ require'lspconfig'.prismals.setup {
     params.processId = vim.NIL
   end,
   cmd = require'lspcontainers'.command('prismals'),
-  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
   ...
 }
 ```
@@ -391,7 +391,7 @@ require'lspconfig'.pyright.setup {
     params.processId = vim.NIL
   end,
   cmd = require'lspcontainers'.command('pyright'),
-  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
   ...
 }
 ```
@@ -439,7 +439,7 @@ require'lspconfig'.svelte.setup {
     params.processId = vim.NIL
   end,
   cmd = require'lspcontainers'.command('svelte'),
-  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
   ...
 }
 ```
@@ -455,7 +455,7 @@ require'lspconfig'.tailwindcss.setup {
   end,
   cmd = require'lspcontainers'.command('tailwindcss'),
   filetypes = { "django-html", "htmldjango", "gohtml", "html", "markdown", "php", "css", "postcss", "sass", "scss", "stylus", "javascript", "javascriptreact", "rescript", "typescript", "typescriptreact", "vue", "svelte" },
-  root_dir = util.root_pattern("tailwind.config.js", "tailwind.config.ts", "postcss.config.js", "postcss.config.ts", "package.json", "node_modules", ".git", vim.fn.getcwd()),
+  root_dir = require'lspconfig/util'.root_pattern("tailwind.config.js", "tailwind.config.ts", "postcss.config.js", "postcss.config.ts", "package.json", "node_modules", ".git", vim.fn.getcwd()),
   ...
 }
 ```
@@ -482,7 +482,7 @@ require'lspconfig'.tsserver.setup {
     params.processId = vim.NIL
   end,
   cmd = require'lspcontainers'.command('tsserver'),
-  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
   ...
 }
 ```
@@ -497,7 +497,7 @@ require'lspconfig'.yamlls.setup {
     params.processId = vim.NIL
   end,
   cmd = require'lspcontainers'.command('yamlls'),
-  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
   ...
 }
 ```
@@ -512,7 +512,7 @@ require'lspconfig'.vuels.setup {
     params.processId = vim.NIL
   end,
   cmd = require'lspcontainers'.command('vuels'),
-  root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+  root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
   ...
 }
 ```
