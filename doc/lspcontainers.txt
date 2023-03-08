@@ -35,13 +35,13 @@ CONTENTS                                                  *lspcontainers-content
       cmd = lspcontainers.command('my_language_server')
     })
 <
- For example, if you were to set up `sumneko_lua`:
+ For example, if you were to set up `lua_ls`:
 >
     local lspconfig = require('lspconfig')
     local lspcontainers = require('lspcontainers')
 
-    lspconfig.sumneko_lua.setup({
-      cmd = lspcontainers.command('sumneko_lua')
+    lspconfig.lua_ls.setup({
+      cmd = lspcontainers.command('lua_ls')
     })
 <
 
