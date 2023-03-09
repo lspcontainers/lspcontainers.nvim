@@ -61,6 +61,7 @@ local function setup_languages()
     local lspcontainers_servers = {
         "bashls",
         "clangd",
+        "denols",
         "dockerls",
         "gopls",
         "graphql",

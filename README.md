@@ -189,6 +189,7 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 
 - [bashls](#bashls)
 - [clangd](#clangd)
+- [denols](#denols)
 - [dockerls](#dockerls)
 - [gopls](#gopls)
 - [graphql](#graphql)
@@ -232,6 +233,21 @@ https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.m
 ```lua
 require'lspconfig'.clangd.setup {
   cmd = require'lspcontainers'.command('clangd'),
+  ...
+}
+```
+
+### denols
+
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#denols
+
+```lua
+require'lspconfig'.denols.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('denols'),
+  root_dir = require'lspconfig/util'.root_pattern("deno.json", vim.fn.getcwd()),
   ...
 }
 ```
