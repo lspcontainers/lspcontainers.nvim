@@ -5,6 +5,7 @@ Config = {
 local supported_languages = {
   bashls = { image = "docker.io/lspcontainers/bash-language-server" },
   clangd = { image = "docker.io/lspcontainers/clangd-language-server" },
+  denols = { image = "docker.io/lspcontainers/denols" },
   dockerls = { image = "docker.io/lspcontainers/docker-language-server" },
   gopls = {
     cmd_builder = function (runtime, workdir, image, network)
