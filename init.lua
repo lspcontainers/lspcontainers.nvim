@@ -74,7 +74,7 @@ local function setup_languages()
         "pyright",
         "rust_analyzer",
         "solargraph",
-        "sumneko_lua",
+        "lua_ls",
         "svelte",
         "tailwindcss",
         "terraformls",

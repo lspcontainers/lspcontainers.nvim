@@ -68,7 +68,7 @@ The `cmd` option of the lspcontainers config also allows modification of the com
 In some circumstances a language server may need the `root_dir` path synced with the Docker container. To sync up the volume mount with the lspconfig's `root_dir`, use `on_new_config`:
 
 ```lua
-local server = "sumneko_lua"
+local server = "lua_ls"
 require'lspconfig'[server].setup{
   on_new_config = function(new_config, new_root_dir)
     new_config.cmd = require'lspcontainers'.command(server, { root_dir = new_root_dir })
@@ -202,7 +202,7 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [pyright](#pyright)
 - [rust_analyzer](#rust_analyzer)
 - [solargraph](#solargraph)
-- [sumneko_lua](#sumneko_lua)
+- [lua_ls](lua_ls)
 - [svelte](#svelte)
 - [tailwindcss](#tailwindcss)
 - [terraformls](#terraformls)
@@ -418,13 +418,13 @@ require'lspconfig'.solargraph.setup {
 }
 ```
 
-### sumneko_lua
+### lua_ls
 
-https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
 
 ```lua
-require'lspconfig'.sumneko_lua.setup {
-  cmd = require'lspcontainers'.command('sumneko_lua'),
+require'lspconfig'.lua_ls.setup {
+  cmd = require'lspcontainers'.command('lua_ls'),
   ...
 }
 ```
