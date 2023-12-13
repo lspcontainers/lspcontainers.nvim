@@ -196,6 +196,7 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [html](#html)
 - [intelephense](#intelephense)
 - [jsonls](#jsonls)
+- [eslintls](#eslintls)
 - [omnisharp](#omnisharp)
 - [powershell_es](#powershell_es)
 - [prismals](#prismals)
@@ -335,6 +336,27 @@ require'lspconfig'.jsonls.setup {
   end,
   cmd = require'lspcontainers'.command('jsonls'),
   root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
+  ...
+}
+```
+
+### eslintls
+
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslintls
+
+```lua
+require'lspconfig'.eslint.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('eslintls'),
+  root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
+  on_attach = function(client, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end,
   ...
 }
 ```
