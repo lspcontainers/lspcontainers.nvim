@@ -143,7 +143,7 @@ end
 
 local function images_pull(runtime)
   local jobs = {}
-  runtime = runtime or "docker"
+  if not (type(runtime) == "string") then runtime = "docker" end
 
   for idx, server_name in ipairs(Config.ensure_installed) do
     local server = supported_languages[server_name]
@@ -168,7 +168,7 @@ end
 
 local function images_remove(runtime)
   local jobs = {}
-  runtime = runtime or "docker"
+  if not (type(runtime) == "string") then runtime = "docker" end
 
   for _, v in pairs(supported_languages) do
     local job =
