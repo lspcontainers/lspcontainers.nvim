@@ -34,7 +34,7 @@ Provide a simple method for running language servers in Docker containers using 
 
 ### Additional Languages
 
-You can add configurations to more languages by providing an image and the command to start the container by adding following options to lspcontainers commands:
+You can add configurations to more languages by providing an image and the command to start the container by adding the following options to lspcontainers commands:
 
 > NOTE: LspContainers makes no attempt to modify LspConfig. It is up to the end user to correctly configure LspConfig.
 
@@ -81,7 +81,7 @@ require'lspconfig'[server].setup{
 You can either mount a path on host or a docker volume
 
 #### Mount Persistent volume
-You can [created a volume](https://docs.docker.com/engine/reference/commandline/volume_create/) (docker_volume) and mount it at path (workdir).
+You can [create a volume](https://docs.docker.com/engine/reference/commandline/volume_create/) (docker_volume) and mount it at path (workdir).
 
 ```bash
 docker create volume persistent_volume_projects
@@ -142,7 +142,7 @@ lspconfig.gopls.setup {
 ### Network support
 
 By default, LSPs that don't require network access run with `network=none`.
-This means the container has not network access. If you have a special case
+This means the container has no network access. If you have a special case
 where an LSP needs network access, you can specify this explicitly:
 
 ```lua
@@ -157,18 +157,18 @@ by default, please open a PR updating its default (see `init.lua`).
 
 ## Process Id
 
-The LSP spec allows a client to sent its process id to a language server, so
+The LSP spec allows a client to send its process id to a language server, so
 that the server can exit immediately when it detects that the client is no
 longer running.
 
-This feature fails to work properly no a containerised language server because
+This feature fails to work properly no a containerized language server because
 the host and the container do not share the container namespace by default.
 
-A container can share a process namespace with the host by passing passing the
+A container can share a process namespace with the host by passing the
 `--pid=host` flag to docker/podman, although it should be noted that this
 somewhat reduces isolation.
 
-It is also possible to simply disabling the process id detection. This can be
+It is also possible to simply disable the process id detection. This can be
 done with the following `before_init` function:
 
 ```
@@ -180,7 +180,7 @@ require'lspconfig'.bashls.setup {
 }
 ```
 
-This is **required** for several LSPs, and the will exit immediately if this is
+This is **required** for several LSPs, and they will exit immediately if this is
 not specified.
 
 ## Supported LSPs
