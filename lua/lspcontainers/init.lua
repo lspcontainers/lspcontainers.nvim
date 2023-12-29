@@ -60,6 +60,7 @@ local supported_languages = {
   pyright = { image = "docker.io/lspcontainers/pyright-langserver" },
   rust_analyzer = { image = "docker.io/lspcontainers/rust-analyzer" },
   solargraph = { image = "docker.io/lspcontainers/solargraph" },
+  lemminx = { image = "docker.io/lspcontainers/lemminx" },
   lua_ls = { image = "docker.io/lspcontainers/lua-language-server" },
   svelte = { image = "docker.io/lspcontainers/svelte-language-server" },
   tailwindcss= { image = "docker.io/lspcontainers/tailwindcss-language-server" },

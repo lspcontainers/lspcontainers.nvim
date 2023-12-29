@@ -203,7 +203,8 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [pyright](#pyright)
 - [rust_analyzer](#rust_analyzer)
 - [solargraph](#solargraph)
-- [lua_ls](lua_ls)
+- [lemminx](#lemminx)
+- [lua_ls](#lua_ls)
 - [svelte](#svelte)
 - [tailwindcss](#tailwindcss)
 - [terraformls](#terraformls)
@@ -430,6 +431,17 @@ https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.m
 ```lua
 require'lspconfig'.solargraph.setup {
   cmd = require'lspcontainers'.command('solargraph'),
+  ...
+}
+```
+
+### lemminx
+
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lemminx
+
+```lua
+require'lspconfig'.lemminx.setup {
+  cmd = require'lspcontainers'.command('lemminx'),
   ...
 }
 ```
