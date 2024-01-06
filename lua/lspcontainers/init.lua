@@ -67,6 +67,7 @@ local supported_languages = {
   terraformls = { image = "docker.io/lspcontainers/terraform-ls" },
   tsserver = { image = "docker.io/lspcontainers/typescript-language-server" },
   vuels = { image = "docker.io/lspcontainers/vue-language-server" },
+  volar = { image = "docker.io/lspcontainers/volar" },
   yamlls = { image = "docker.io/lspcontainers/yaml-language-server" },
 }
 

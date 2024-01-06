@@ -82,6 +82,7 @@ local function setup_languages()
         "terraformls",
         "tsserver",
         "vuels",
+        "volar",
         "yamlls"
     }
 
