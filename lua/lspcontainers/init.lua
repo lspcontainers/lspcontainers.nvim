@@ -53,6 +53,7 @@ local supported_languages = {
   html = { image = "docker.io/lspcontainers/html-language-server" },
   intelephense = { image = "docker.io/lspcontainers/intelephense" },
   jsonls = { image = "docker.io/lspcontainers/json-language-server" },
+  eslintls = { image = "docker.io/lspcontainers/eslint-language-server" },
   omnisharp = { image = "docker.io/lspcontainers/omnisharp" },
   powershell_es = { image = "docker.io/lspcontainers/powershell-language-server" },
   prismals = { image = "docker.io/lspcontainers/prisma-language-server" },

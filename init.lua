@@ -68,6 +68,7 @@ local function setup_languages()
         "html",
         "intelephense",
         "jsonls",
+        "eslintls",
         "omnisharp",
         "powershell_es",
         "prismals",
