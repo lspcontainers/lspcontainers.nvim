@@ -207,6 +207,7 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [lua_ls](#lua_ls)
 - [svelte](#svelte)
 - [tailwindcss](#tailwindcss)
+- [taplo](#taplo)
 - [terraformls](#terraformls)
 - [tsserver](#tsserver)
 - [vuels](#vuels)
@@ -484,6 +485,20 @@ require'lspconfig'.tailwindcss.setup {
   cmd = require'lspcontainers'.command('tailwindcss'),
   filetypes = { "django-html", "htmldjango", "gohtml", "html", "markdown", "php", "css", "postcss", "sass", "scss", "stylus", "javascript", "javascriptreact", "rescript", "typescript", "typescriptreact", "vue", "svelte" },
   root_dir = require'lspconfig/util'.root_pattern("tailwind.config.js", "tailwind.config.ts", "postcss.config.js", "postcss.config.ts", "package.json", "node_modules", ".git", vim.fn.getcwd()),
+  ...
+}
+```
+
+### taplo
+
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#taplo
+
+```lua
+require'lspconfig'.taplo.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('taplo'),
   ...
 }
 ```
