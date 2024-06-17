@@ -79,6 +79,7 @@ local function setup_languages()
         "lua_ls",
         "svelte",
         "tailwindcss",
+        "taplo",
         "terraformls",
         "tsserver",
         "vuels",

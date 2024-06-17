@@ -63,6 +63,7 @@ local supported_languages = {
   lemminx = { image = "docker.io/lspcontainers/lemminx" },
   lua_ls = { image = "docker.io/lspcontainers/lua-language-server" },
   svelte = { image = "docker.io/lspcontainers/svelte-language-server" },
+  taplo = { image = "docker.io/lspcontainers/taplo-language-server" },
   tailwindcss= { image = "docker.io/lspcontainers/tailwindcss-language-server" },
   terraformls = { image = "docker.io/lspcontainers/terraform-ls" },
   tsserver = { image = "docker.io/lspcontainers/typescript-language-server" },
