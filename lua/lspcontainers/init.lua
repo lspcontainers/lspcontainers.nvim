@@ -50,6 +50,7 @@ local supported_languages = {
     image = "docker.io/lspcontainers/gopls",
   },
   graphql = { image = "docker.io/lspcontainers/graphql-language-service-cli" },
+  helmls = { image = "docker.io/lspcontainers/helm-language-server" },
   html = { image = "docker.io/lspcontainers/html-language-server" },
   intelephense = { image = "docker.io/lspcontainers/intelephense" },
   jsonls = { image = "docker.io/lspcontainers/json-language-server" },
