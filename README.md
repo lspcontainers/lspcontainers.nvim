@@ -193,6 +193,7 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [dockerls](#dockerls)
 - [gopls](#gopls)
 - [graphql](#graphql)
+- [helmls](#helmls)
 - [html](#html)
 - [intelephense](#intelephense)
 - [jsonls](#jsonls)
@@ -289,6 +290,21 @@ require'lspconfig'.graphql.setup {
     params.processId = vim.NIL
   end,
   cmd = require'lspcontainers'.command('graphql'),
+  root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
+  ...
+}
+```
+
+### helmls
+
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#helm_ls
+
+```lua
+require'lspconfig'.helm_ls.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('helmls'),
   root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
   ...
 }

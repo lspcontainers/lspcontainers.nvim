@@ -65,6 +65,7 @@ local function setup_languages()
         "dockerls",
         "gopls",
         "graphql",
+        "helmls",
         "html",
         "intelephense",
         "jsonls",
