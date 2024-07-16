@@ -1,50 +1,64 @@
 {
-  inputs = { nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable"; };
+  description = "lspcontainers.nvim";
 
-  outputs = { self, nixpkgs }:
-    let
-      supportedSystems =
-        [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-      pkgs = forAllSystems (system:
-        import nixpkgs {
-          overlays = [ ];
-          inherit system;
-        });
-    in {
-      packages = forAllSystems (system: {
-        default = pkgs.${system}.vimUtils.buildVimPluginFrom2Nix {
-          name = "lspcontainers.nvim";
-          src = ./.;
-        };
-        neovim = pkgs.${system}.neovim.override {
-          configure = {
-            customRC = ''
-              lua << EOF
-                ${(builtins.readFile ./init.lua)};
-              EOF
-            '';
-            packages.main = with pkgs.${system}.vimPlugins; {
-              start = [
-                nvim-lspconfig
-                self.packages.${system}.default
-              ];
+  inputs = {
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  };
+
+  outputs = inputs @ {flake-parts, ...}:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"];
+
+      perSystem = {
+        config,
+        pkgs,
+        system,
+        ...
+      }: let
+        inherit (pkgs) just luajitPackages mkShell neovim vimPlugins vimUtils writeShellApplication;
+        inherit (luajitPackages) luacheck vusted;
+      in {
+        packages = {
+          default = vimUtils.buildVimPlugin {
+            name = "lspcontainers.nvim";
+            src = ./.;
+          };
+
+          neovim = neovim.override {
+            configure = {
+              customRC = ''
+                lua << EOF
+                  ${(builtins.readFile ./init.lua)};
+                EOF
+              '';
+              packages.main = with vimPlugins; {
+                start = [
+                  nvim-lspconfig
+                  config.packages.default
+                ];
+              };
             };
           };
         };
-      });
 
-      devShells = forAllSystems (system: {
-        default = pkgs.${system}.mkShellNoCC {
-          buildInputs = [ self.packages.${system}.neovim ];
+        devShells = {
+          default = mkShell {
+            nativeBuildInputs = [just luacheck vusted];
+          };
         };
-      });
 
-      apps = forAllSystems (system: {
-        neovim = {
-          program = "${self.packages.${system}.neovim}/bin/nvim";
-          type = "app";
+        apps = {
+          neovim = {
+            program = "${config.packages.neovim}/bin/nvim";
+            type = "app";
+          };
+
+          test = {
+            program = "${config.packages.test}/bin/test";
+            type = "app";
+          };
         };
-      });
+      };
     };
 }
