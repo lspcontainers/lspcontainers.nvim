@@ -16,7 +16,7 @@
         system,
         ...
       }: let
-        inherit (pkgs) just luajitPackages mkShell neovim vimPlugins vimUtils writeShellApplication;
+        inherit (pkgs) just luajitPackages mkShell neovim vimPlugins vimUtils;
         inherit (luajitPackages) luacheck vusted;
       in {
         packages = {

@@ -4,7 +4,7 @@ local lspcontainers = require 'lspcontainers'
 -- Inspired from https://github.com/neovim/nvim-lspconfig/blob/master/scripts/docgen.lua
 local function require_supported_configs()
     -- Configs are lazy-loaded, tickle them to populate the `configs` singleton.
-    for language_server, _ in pairs(lspcontainers.supported_languages) do
+    for language_server, _ in pairs(lspcontainers.server_configuration) do
         configs[language_server] = require('lspconfig.server_configurations.' .. language_server)
     end
 end
@@ -17,7 +17,7 @@ describe('lspcontainers', function()
         local emoji_ok = '✅'
         local not_found = 0
 
-        for lsp_name, _ in pairs(lspcontainers.supported_languages) do
+        for lsp_name, _ in pairs(lspcontainers.server_configuration) do
             if vim.tbl_contains(vim.tbl_keys(configs), lsp_name) then
                 print(lsp_name, emoji_ok)
             else
