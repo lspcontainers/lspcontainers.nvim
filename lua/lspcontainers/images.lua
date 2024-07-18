@@ -1,4 +1,4 @@
-local languages = require("lspcontainers.languages")
+local configs = require("lspcontainers.configs")
 local runtimes = require("lspcontainers.runtimes")
 
 local function on_event(_, data, event)
@@ -18,7 +18,7 @@ local function pull()
     local jobs = {}
 
     for idx, server_name in ipairs(Config.ensure_installed) do
-        local server = languages.server_configuration[server_name]
+        local server = configs.server_configuration[server_name]
 
         local job_id =
             vim.fn.jobstart(
@@ -44,7 +44,7 @@ local function remove()
     local jobs = {}
 
     for idx, server_name in ipairs(Config.ensure_installed) do
-        local server = languages.server_configuration[server_name]
+        local server = configs.server_configuration[server_name]
 
         local job =
             vim.fn.jobstart(
