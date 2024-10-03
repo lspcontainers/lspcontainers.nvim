@@ -208,6 +208,7 @@ Below is a list of supported language servers for configuration with `nvim-lspco
 - [svelte](#svelte)
 - [tailwindcss](#tailwindcss)
 - [terraformls](#terraformls)
+- [ts_ls](#ts_ls)
 - [tsserver](#tsserver)
 - [vuels](#vuels)
 - [yamlls](#yamlls)
@@ -496,6 +497,21 @@ https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.m
 require'lspconfig'.terraformls.setup {
   cmd = require'lspcontainers'.command('terraformls'),
   filetypes = { "hcl", "tf", "terraform", "tfvars" },
+  ...
+}
+```
+
+### ts_ls
+
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ts_ls
+
+```lua
+require'lspconfig'.ts_ls.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require'lspcontainers'.command('ts_ls'),
+  root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
   ...
 }
 ```
