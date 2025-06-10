@@ -161,7 +161,7 @@ The LSP spec allows a client to send its process id to a language server, so
 that the server can exit immediately when it detects that the client is no
 longer running.
 
-This feature fails to work properly no a containerized language server because
+This feature fails to work properly on a containerized language server because
 the host and the container do not share the container namespace by default.
 
 A container can share a process namespace with the host by passing the
