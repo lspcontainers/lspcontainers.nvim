@@ -80,6 +80,7 @@ local function setup_languages()
         "svelte",
         "tailwindcss",
         "terraformls",
+        "ts_ls",
         "tsserver",
         "vuels",
         "yamlls"
