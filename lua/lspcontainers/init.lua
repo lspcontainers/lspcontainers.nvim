@@ -100,6 +100,7 @@ local default_cmd = function(runtime, workdir, image, network, docker_volume)
         "--network=" .. network,
         "--workdir=" .. workdir,
         mnt_volume,
+        "--tmpfs=/tmp",
         image
     }
 end
