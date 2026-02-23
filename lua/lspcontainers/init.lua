@@ -65,6 +65,7 @@ local supported_languages = {
     svelte = { image = "docker.io/lspcontainers/svelte-language-server" },
     tailwindcss = { image = "docker.io/lspcontainers/tailwindcss-language-server" },
     terraformls = { image = "docker.io/lspcontainers/terraform-ls" },
+    ts_ls = { image = "docker.io/lspcontainers/typescript-language-server" },
     tsserver = { image = "docker.io/lspcontainers/typescript-language-server" },
     vuels = { image = "docker.io/lspcontainers/vue-language-server" },
     yamlls = { image = "docker.io/lspcontainers/yaml-language-server" },
