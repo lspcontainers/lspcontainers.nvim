@@ -20,7 +20,7 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: ${{ env.CACHIX_BINARY_CACHE }}
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - run: nix develop -c just check
 
   build:
@@ -39,7 +39,7 @@ jobs:
         with:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           name: ${{ env.CACHIX_BINARY_CACHE }}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: nix develop -c just build "${{ matrix.profile }}"
 
   test:
@@ -58,5 +58,5 @@ jobs:
         with:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           name: ${{ env.CACHIX_BINARY_CACHE }}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: nix develop -c just test-${{ matrix.suite }}
